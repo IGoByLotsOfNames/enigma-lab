@@ -1,0 +1,193 @@
+{
+  "retrieved_date": "2026-10-03",
+  "label": "VERIFIED: references read; future fixture checks are explicitly not yet run",
+  "conventions": {
+    "rotor_order": "left to right, slow to fast",
+    "windows": "before first keypress",
+    "rings": "letters A-Z; zero-based integers only internally",
+    "signal_timing": "step first",
+    "turnover_window_letters_I_to_V": "QEVJZ"
+  },
+  "references": [
+    {
+      "id": "museum-wiring",
+      "url": "https://www.cryptomuseum.com/crypto/enigma/wiring.htm",
+      "section": "Enigma I",
+      "role": "Wiring/turnover data",
+      "status": "Compared I-V and wide B/C with original literals"
+    },
+    {
+      "id": "museum-mechanics",
+      "url": "https://www.cryptomuseum.com/crypto/enigma/working.htm",
+      "section": "Rotor stepping and double stepping",
+      "role": "Mechanics and published display trace",
+      "status": "Read; used to corroborate diagnostic expectations"
+    },
+    {
+      "id": "rijmenants",
+      "url": "https://www.ciphermachinesandcryptology.com/en/enigmatech.htm#steppingmechanism",
+      "role": "Authored mechanical explanation",
+      "status": "Read; no images or prose copied"
+    },
+    {
+      "id": "pyenigma-tests",
+      "url": "https://github.com/gremmie/enigma/blob/master/enigma/tests/test_enigma.py",
+      "role": "Maintainer regression fixture",
+      "version_limit": "Mutable master URL; retrieved date recorded, no commit pin yet",
+      "status": "AAAAA/BDZGO compared with original; no external library installed"
+    },
+    {
+      "id": "pyenigma-defaults",
+      "url": "https://github.com/gremmie/enigma/blob/master/enigma/machine.py",
+      "role": "Confirm default rings, reflector, plugboard and ordering",
+      "status": "Read"
+    },
+    {
+      "id": "pyenigma-guide",
+      "url": "https://py-enigma.readthedocs.io/en/latest/guide.html#example-communication-procedure",
+      "role": "Complete non-default worked fixtures",
+      "displayed_version": "1.0.2 documentation",
+      "status": "Read; implementation cannot yet express these settings"
+    },
+    {
+      "id": "buckley-kata",
+      "url": "https://kerryb.github.io/enigma/#test-cases",
+      "role": "Authored non-default-ring fixture",
+      "status": "Read; implementation cannot yet express these settings"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "published-basic-B",
+      "source": "pyenigma-tests",
+      "settings": {
+        "rotors": [
+          "I",
+          "II",
+          "III"
+        ],
+        "reflector": "B",
+        "rings": "AAA",
+        "windows": "AAA",
+        "plugboard": []
+      },
+      "input": "AAAAA",
+      "expected": "BDZGO",
+      "observed_original": "UDHLX",
+      "status": "Original mismatch observed",
+      "provenance_limit": "Maintainer credits Wikipedia; software regression example, not a physical-machine observation"
+    },
+    {
+      "id": "published-ring-TME",
+      "source": "buckley-kata",
+      "settings": {
+        "rotors": [
+          "III",
+          "II",
+          "I"
+        ],
+        "reflector": "B",
+        "rings": "TME",
+        "rings_numeric_one_based": [
+          20,
+          13,
+          5
+        ],
+        "windows": "AAA",
+        "plugboard": []
+      },
+      "input": "HELLOWORLD",
+      "expected": "JCEESPSDYR",
+      "status": "Deferred to Phase 3; not run",
+      "provenance_limit": "Published simulator fixture"
+    },
+    {
+      "id": "published-nondefault-key",
+      "source": "pyenigma-guide",
+      "settings": {
+        "rotors": [
+          "II",
+          "IV",
+          "V"
+        ],
+        "reflector": "B",
+        "rings": "BUL",
+        "windows": "WXC",
+        "plugboard": "AV BS CG DL FU HZ IN KM OW RX"
+      },
+      "input": "BLA",
+      "expected": "KCH",
+      "status": "Deferred to Phase 3; not run"
+    },
+    {
+      "id": "published-nondefault-message",
+      "source": "pyenigma-guide",
+      "settings": {
+        "rotors": [
+          "II",
+          "IV",
+          "V"
+        ],
+        "reflector": "B",
+        "rings": "BUL",
+        "windows": "BLA",
+        "plugboard": "AV BS CG DL FU HZ IN KM OW RX"
+      },
+      "input": "THEXRUSSIANSXAREXCOMINGX",
+      "expected": "NIBLFMYMLLUFWCASCSSNVHAZ",
+      "status": "Deferred to Phase 3; not run",
+      "provenance_limit": "Maintainer's simplified worked scenario; not a claim that this exact English text is a wartime intercept"
+    },
+    {
+      "id": "published-double-step",
+      "source": "rijmenants",
+      "rotors": [
+        "III",
+        "II",
+        "I"
+      ],
+      "initial_windows": "KDO",
+      "expected_windows_after_keys": [
+        "KDP",
+        "KDQ",
+        "KER",
+        "LFS",
+        "LFT",
+        "LFU"
+      ],
+      "status": "Future regression fixture; original fixed-order CLI cannot express it",
+      "configuration_note": "Trace depends on pre-step visible notch states. Use rings AAA/B/no plugs as an explicit future test configuration; these choices are not extra source claims."
+    },
+    {
+      "id": "derived-double-step",
+      "sources": [
+        "museum-wiring",
+        "museum-mechanics"
+      ],
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "rings": "AAA",
+      "initial_windows": "ADU",
+      "expected_windows_after_keys": [
+        "ADV",
+        "AEW",
+        "BFX"
+      ],
+      "observed_helper_with_corrected_constants_only": [
+        "ADV",
+        "BEW",
+        "BEX"
+      ],
+      "status": "Observed in controlled helper probe",
+      "provenance_limit": "Derived from documented rules, not an independently published full trace. Constants injected to isolate the algorithm; original file unchanged."
+    }
+  ],
+  "gaps": [
+    "No fully validated external wide-C whole-message fixture adopted yet. Wiring checks alone do not validate the C signal path; independent implementation cross-check required before claiming C correctness.",
+    "Do not count repeated Py-Enigma/Rijmenants citations as independent historical evidence families.",
+    "Freeze any external oracle version and preserve applicable notices before a future installation or code reuse."
+  ]
+}
