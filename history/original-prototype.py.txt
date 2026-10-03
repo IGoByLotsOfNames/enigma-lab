@@ -1,0 +1,230 @@
+import time
+
+##printing = "'a':'{:}', 'b':'{:}',  'c':'{:}', 'd':'{:}', 'e':'{:}', 'f':'{:}', 'g':'{:}', 'h':'{:}', 'i':'{:}', 'j':'{:}', 'k':'{:}', 'l':'{:}', 'm':'{:}', 'n':'{:}', 'o':'{:}', 'p':'{:}', 'q':'{:}', 'r':'{:}', 's':'{:}', 't':'{:}', 'u':'{:}', 'v':'{:}', 'w':'{:}', 'x':'{:}', 'y':'{:}', 'z':'{:}'"
+##
+##titrating = 'BDFHJLCPRTXVZNYEIWGAKMUSQO'.lower()
+##
+##printing = printing.format(titrating[0], titrating[1], titrating[2], titrating[3], titrating[4], titrating[5], titrating[6], titrating[7], titrating[8], titrating[9], titrating[10], titrating[11], titrating[12], titrating[13], titrating[14], titrating[15], titrating[16], titrating[17], titrating[18], titrating[19], titrating[20], titrating[21], titrating[22], titrating[23], titrating[24], titrating[25], )
+##print(printing)
+
+
+ideal = 'heilhitler'
+
+
+# Enigma M3 (in use) -----------------------------------------------------------------------------------------------------------------------------
+rotor1 = {'a':'e', 'b':'k',  'c':'m', 'd':'f', 'e':'l', 'f':'g', 'g':'d', 'h':'q', 'i':'v', 'j':'z', 'k':'n', 'l':'t', 'm':'o', 'n':'w', 'o':'y', 'p':'h', 'q':'x', 'r':'u', 's':'s', 't':'p', 'u':'a', 'v':'i', 'w':'b', 'x':'r', 'y':'c', 'z':'j'}
+rotor2 = {'a':'a', 'b':'j',  'c':'d', 'd':'k', 'e':'s', 'f':'i', 'g':'r', 'h':'u', 'i':'x', 'j':'b', 'k':'l', 'l':'h', 'm':'w', 'n':'t', 'o':'m', 'p':'c', 'q':'q', 'r':'g', 's':'z', 't':'n', 'u':'p', 'v':'y', 'w':'f', 'x':'v', 'y':'o', 'z':'e'}
+rotor3 = {'a':'b', 'b':'d',  'c':'f', 'd':'h', 'e':'j', 'f':'l', 'g':'c', 'h':'p', 'i':'r', 'j':'t', 'k':'x', 'l':'v', 'm':'z', 'n':'n', 'o':'y', 'p':'e', 'q':'i', 'r':'w', 's':'g', 't':'a', 'u':'k', 'v':'m', 'w':'u', 'x':'s', 'y':'q', 'z':'o'}
+rotor4 = {'a':'e', 'b':'s',  'c':'o', 'd':'v', 'e':'p', 'f':'z', 'g':'j', 'h':'a', 'i':'y', 'j':'q', 'k':'u', 'l':'i', 'm':'r', 'n':'h', 'o':'x', 'p':'l', 'q':'n', 'r':'f', 's':'t', 't':'g', 'u':'k', 'v':'d', 'w':'c', 'x':'m', 'y':'w', 'z':'b'}
+rotor5 = {'a':'v', 'b':'z',  'c':'b', 'd':'r', 'e':'g', 'f':'i', 'g':'t', 'h':'y', 'i':'u', 'j':'p', 'k':'s', 'l':'d', 'm':'n', 'n':'h', 'o':'l', 'p':'x', 'q':'a', 'r':'w', 's':'m', 't':'j', 'u':'q', 'v':'o', 'w':'f', 'x':'e', 'y':'c', 'z':'k'}
+
+rotor1_t = 25
+rotor2_t = 13
+rotor3_t = 4
+rotor4_t = 18
+rotor5_t = 8
+
+rotor1_rev = {'e': 'a', 'k': 'b', 'm': 'c', 'f': 'd', 'l': 'e', 'g': 'f', 'd': 'g', 'q': 'h', 'v': 'i', 'z': 'j', 'n': 'k', 't': 'l', 'o': 'm', 'w': 'n', 'y': 'o', 'h': 'p', 'x': 'q', 'u': 'r', 's': 's', 'p': 't', 'a': 'u', 'i': 'v', 'b': 'w', 'r': 'x', 'c': 'y', 'j': 'z'}
+rotor2_rev = {'a': 'a', 'j': 'b', 'd': 'c', 'k': 'd', 's': 'e', 'i': 'f', 'r': 'g', 'u': 'h', 'x': 'i', 'b': 'j', 'l': 'k', 'h': 'l', 'w': 'm', 't': 'n', 'm': 'o', 'c': 'p', 'q': 'q', 'g': 'r', 'z': 's', 'n': 't', 'p': 'u', 'y': 'v', 'f': 'w', 'v': 'x', 'o': 'y', 'e': 'z'}
+rotor3_rev = {'b': 'a', 'd': 'b', 'f': 'c', 'h': 'd', 'j': 'e', 'l': 'f', 'c': 'g', 'p': 'h', 'r': 'i', 't': 'j', 'x': 'k', 'v': 'l', 'z': 'm', 'n': 'n', 'y': 'o', 'e': 'p', 'i': 'q', 'w': 'r', 'g': 's', 'a': 't', 'k': 'u', 'm': 'v', 'u': 'w', 's': 'x', 'q': 'y', 'o': 'z'}
+rotor4_rev = {'e': 'a', 's': 'b', 'o': 'c', 'v': 'd', 'p': 'e', 'z': 'f', 'j': 'g', 'a': 'h', 'y': 'i', 'q': 'j', 'u': 'k', 'i': 'l', 'r': 'm', 'h': 'n', 'x': 'o', 'l': 'p', 'n': 'q', 'f': 'r', 't': 's', 'g': 't', 'k': 'u', 'd': 'v', 'c': 'w', 'm': 'x', 'w': 'y', 'b': 'z'}
+rotor5_rev = {'v': 'a', 'z': 'b', 'b': 'c', 'r': 'd', 'g': 'e', 'i': 'f', 't': 'g', 'y': 'h', 'u': 'i', 'p': 'j', 's': 'k', 'd': 'l', 'n': 'm', 'h': 'n', 'l': 'o', 'x': 'p', 'a': 'q', 'w': 'r', 'm': 's', 'j': 't', 'q': 'u', 'o': 'v', 'f': 'w', 'e': 'x', 'c': 'y', 'k': 'z'}
+
+rotor1_rev_alpha = ['e', 'k', 'm', 'f', 'l', 'g', 'd', 'q', 'v', 'z', 'n', 't', 'o', 'w', 'y', 'h', 'x', 'u', 's', 'p', 'a', 'i', 'b', 'r', 'c', 'j']
+rotor2_rev_alpha = ['a', 'j', 'd', 'k', 's', 'i', 'r', 'u', 'x', 'b', 'l', 'h', 'w', 't', 'm', 'c', 'q', 'g', 'z', 'n', 'p', 'y', 'f', 'v', 'o', 'e']
+rotor3_rev_alpha = ['b', 'd', 'f', 'h', 'j', 'l', 'c', 'p', 'r', 't', 'x', 'v', 'z', 'n', 'y', 'e', 'i', 'w', 'g', 'a', 'k', 'm', 'u', 's', 'q', 'o']
+rotor4_rev_alpha = ['e', 's', 'o', 'v', 'p', 'z', 'j', 'a', 'y', 'q', 'u', 'i', 'r', 'h', 'x', 'l', 'n', 'f', 't', 'g', 'k', 'd', 'c', 'm', 'w', 'b']
+rotor5_rev_alpha = ['v', 'z', 'b', 'r', 'g', 'i', 't', 'y', 'u', 'p', 's', 'd', 'n', 'h', 'l', 'x', 'a', 'w', 'm', 'j', 'q', 'o', 'f', 'e', 'c', 'k']
+
+
+ukw_b = {'a':'y', 'b':'r',  'c':'u', 'd':'h', 'e':'q', 'f':'s', 'g':'l', 'h':'d', 'i':'p', 'j':'x', 'k':'n', 'l':'g', 'm':'o', 'n':'k', 'o':'m', 'p':'i', 'q':'e', 'r':'b', 's':'f', 't':'z', 'u':'c', 'v':'w', 'w':'v', 'x':'j', 'y':'a', 'z':'t'}
+ukw_c = {'a':'f', 'b':'v',  'c':'p', 'd':'j', 'e':'i', 'f':'a', 'g':'o', 'h':'y', 'i':'e', 'j':'d', 'k':'r', 'l':'z', 'm':'x', 'n':'w', 'o':'g', 'p':'c', 'q':'t', 'r':'k', 's':'u', 't':'q', 'u':'s', 'v':'b', 'w':'n', 'x':'m', 'y':'h', 'z':'l'}
+
+re_b_thin = {'a':'e', 'b':'n',  'c':'k', 'd':'q', 'e':'a', 'f':'u', 'g':'y', 'h':'w', 'i':'j', 'j':'i', 'k':'c', 'l':'o', 'm':'p', 'n':'b', 'o':'l', 'p':'m', 'q':'d', 'r':'x', 's':'z', 't':'v', 'u':'f', 'v':'t', 'w':'h', 'x':'r', 'y':'g', 'z':'s'}
+re_c_thin = {'a':'r', 'b':'d',  'c':'o', 'd':'b', 'e':'j', 'f':'n', 'g':'t', 'h':'k', 'i':'v', 'j':'e', 'k':'h', 'l':'m', 'm':'l', 'n':'f', 'o':'c', 'p':'w', 'q':'z', 'r':'a', 's':'x', 't':'g', 'u':'y', 'v':'i', 'w':'p', 'x':'s', 'y':'u', 'z':'q'}
+
+alpha_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+reflector = ukw_b
+
+# Enigma K --------------------------------------------------------------------------------------------------------------------------------
+##rotor1 = {'a':'c', 'b':'j',  'c':'g', 'd':'d', 'e':'p', 'f':'s', 'g':'h', 'h':'k', 'i':'t', 'j':'u', 'k':'r', 'l':'a', 'm':'w', 'n':'z', 'o':'x', 'p':'f', 'q':'m', 'r':'y', 's':'n', 't':'q', 'u':'o', 'v':'b', 'w':'v', 'x':'l', 'y':'i', 'z':'e'}
+##rotor2 = {'a':'s', 'b':'l',  'c':'v', 'd':'g', 'e':'b', 'f':'t', 'g':'f', 'h':'x', 'i':'j', 'j':'q', 'k':'o', 'l':'h', 'm':'e', 'n':'w', 'o':'i', 'p':'r', 'q':'z', 'r':'y', 's':'a', 't':'m', 'u':'k', 'v':'p', 'w':'c', 'x':'n', 'y':'d', 'z':'u'}
+##rotor3 = {'a':'l', 'b':'p',  'c':'g', 'd':'s', 'e':'z', 'f':'m', 'g':'h', 'h':'a', 'i':'e', 'j':'o', 'k':'q', 'l':'k', 'm':'v', 'n':'x', 'o':'r', 'p':'f', 'q':'y', 'r':'b', 's':'u', 't':'t', 'u':'n', 'v':'i', 'w':'c', 'x':'j', 'y':'d', 'z':'w'}
+##
+##rotor1_rev = {'c': 'a', 'j': 'b', 'g': 'c', 'd': 'd', 'p': 'e', 's': 'f', 'h': 'g', 'k': 'h', 't': 'i', 'u': 'j', 'r': 'k', 'a': 'l', 'w': 'm', 'z': 'n', 'x': 'o', 'f': 'p', 'm': 'q', 'y': 'r', 'n': 's', 'q': 't', 'o': 'u', 'b': 'v', 'v': 'w', 'l': 'x'}
+##rotor2_rev = {'s': 'a', 'l': 'b', 'v': 'c', 'g': 'd', 'b': 'e', 't': 'f', 'f': 'g', 'x': 'h', 'j': 'i', 'q': 'j', 'o': 'k', 'h': 'l', 'e': 'm', 'w': 'n', 'i': 'o', 'r': 'p', 'z': 'q', 'y': 'r', 'a': 's', 'm': 't', 'k': 'u', 'p': 'v', 'c': 'w', 'n': 'x'}
+##rotor3_rev = {'l': 'a', 'p': 'b', 'g': 'c', 's': 'd', 'z': 'e', 'm': 'f', 'h': 'g', 'a': 'h', 'e': 'i', 'o': 'j', 'q': 'k', 'k': 'l', 'v': 'm', 'x': 'n', 'r': 'o', 'f': 'p', 'y': 'q', 'b': 'r', 'u': 's', 't': 't', 'n': 'u', 'i': 'v', 'c': 'w', 'j': 'x'}
+
+def index_coincidence(string):
+    same = 0
+    for i in range(10):
+        if ideal[i] == dealing[i]:
+            same+=1
+    return same/10
+
+def turn():
+    global cal1, cal2, cal3, constant3, constant2
+
+    if cal3 == constant3:
+        if cal3 != 25:
+            cal3+=1
+        else:
+            cal3 = 1
+        if cal2 != 25:
+            cal2+=1
+        else:
+            cal2 = 1
+        
+        if cal2 == constant2:
+            if cal1 != 25:
+                cal1+=1
+            else:
+                cal1 = 1
+    else:
+        if cal3 != 26:
+            cal3+=1
+        else:
+            cal3 = 1
+
+def cal_var(rotor, letter):
+    current_index = alpha_list.index(letter)
+    
+    if rotor == 3:
+        current_index+=cal3
+        if current_index >= 26:
+            current_index-=26
+        return alpha_list[current_index]
+        
+    elif rotor == 2:
+        current_index+=cal2
+        if current_index >= 26:
+            current_index-=26
+        return alpha_list[current_index]
+        
+    elif rotor == 1:
+        current_index+=cal1
+        if current_index >= 26:
+            current_index-=26
+        return alpha_list[current_index]
+
+def cal_var_rev(rotor, letter):
+    if rotor == 1:
+        alpha = rotor_rev_constant1
+    elif rotor == 2:
+        alpha = rotor_rev_constant2
+    elif rotor == 3:
+        alpha = rotor_rev_constant3
+
+    current_index = alpha.index(letter)
+
+    if rotor == 1:
+        current_index-=cal1
+        if current_index < 0:
+            current_index+=26
+        return alpha[current_index]
+    
+    elif rotor == 2:
+        current_index-=cal2
+        if current_index < 0:
+            current_index+=26
+        return alpha[current_index]
+    
+    elif rotor == 3:
+        current_index-=cal3
+        if current_index < 0:
+            current_index+=26
+        return alpha[current_index]
+    
+print(rotor3_rev[rotor2_rev[rotor1_rev[reflector[rotor1[rotor2[rotor3['a']]]]]]])
+
+# code starts ---------
+while True:
+    cal1 = 0
+    cal2 = 0
+    cal3 = 0
+
+    constant3 = 'None'
+    constant2 = 'None'
+    
+    encrypted = str(input('Encrypted text: ')).lower().replace(' ', '')
+##    dealing = encrypted[-10:]
+    dealing = encrypted
+    print('\n\n')
+    
+    print('analysing [I II III]...')
+    constant3 = rotor3_t
+    constant2 = rotor2_t
+    
+    rotor_rev_constant1 = rotor1_rev_alpha
+    rotor_rev_constant2 = rotor2_rev_alpha
+    rotor_rev_constant3 = rotor3_rev_alpha
+    
+    while True:
+##        turn()
+
+        printing = ''
+        for i in range(len(dealing)):
+##            turn()
+            
+            var = dealing[i]
+
+##            print(var)
+            var = cal_var(3, var)
+##            print(var)
+            var = rotor3[var]
+##            print(var)
+
+            if cal2 != 0:
+                var = cal_var(2, var)
+            var = rotor2[var]
+
+            if cal1 != 0:
+                var = cal_var(1, var)
+            var = rotor1[var]
+
+            var = reflector[var]
+
+            var = cal_var_rev(1, var)
+
+            var = rotor1_rev[var]
+
+            var = cal_var_rev(2, var)
+
+            var = rotor2_rev[var]
+
+            var = cal_var_rev(3, var)
+
+            var = rotor3_rev[var]
+
+            turn()
+
+            printing+=var
+
+
+        print(printing)
+
+        input()
+
+    print('analysing [I III II]...')
+    
+    print('analysing [II I III]...')
+    
+    print('analysing [II III I]...')
+    
+    print('analysing [III I II]...')
+    
+    print('analysing [III II I]...')
+    
+    
+        
+
+    
+    
+
+
+
+
+    
+    
+    
