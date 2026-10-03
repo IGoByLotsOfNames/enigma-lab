@@ -1,0 +1,32 @@
+ENIGMA SEARCH COMPARISON - RESULTS TEMPLATE
+Blank template for future runs. Existing verified results are in MEASURED_RESULTS.txt.
+This reusable template intentionally contains no measured values.
+
+Run directory:
+Plan SHA256:
+Input and source hashes verified:
+Run status (must be complete):
+Python/OS/processor:
+Power mode:
+Plugged-in/battery state:
+Background activity and interruptions:
+Failed/aborted attempts, if any:
+
+For each of the four frozen cases and both implementations record:
+case | implementation | n process means | mean ms | median ms | sample SD ms |
+sample variance ms^2 | minimum process mean | maximum process mean
+
+For each case also retain:
+- All raw timings and the scheduled execution order.
+- Five paired early-minus-baseline deltas in ms and their summary.
+- Five paired baseline/early ratios and their summary.
+- Full match set equality and known-start inclusion.
+- Candidate count and exact transformed-character count for each implementation.
+
+Interpretation:
+State whether an implementation improved, regressed or remained inconclusive
+for each workload. Report all cases even if some become slower. No pooled speedup,
+request-tail percentile, representative-workload claim or historical hardware
+comparison is supported by this experiment. Distinguish work counts from time.
+
+This template does not replace the script's raw JSON receipts and summary.

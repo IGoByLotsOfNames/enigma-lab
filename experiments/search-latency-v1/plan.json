@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "benchmark": "complete-start-position-search",
+  "schedule_seed": 1729,
+  "warmup_calls": 1,
+  "timed_calls": 2,
+  "processes_per_implementation_case": 5,
+  "subprocess_timeout_seconds": 600,
+  "implementations": [
+    "baseline",
+    "early"
+  ],
+  "case_ids": [
+    "basic-B-5",
+    "ambiguous-B-1",
+    "early-B-97",
+    "late-B-97"
+  ],
+  "schedule": [
+    {
+      "job_id": "job-01",
+      "case_id": "early-B-97",
+      "replicate": 3,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-02",
+      "case_id": "early-B-97",
+      "replicate": 3,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-03",
+      "case_id": "ambiguous-B-1",
+      "replicate": 5,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-04",
+      "case_id": "ambiguous-B-1",
+      "replicate": 5,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-05",
+      "case_id": "late-B-97",
+      "replicate": 4,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-06",
+      "case_id": "late-B-97",
+      "replicate": 4,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-07",
+      "case_id": "ambiguous-B-1",
+      "replicate": 3,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-08",
+      "case_id": "ambiguous-B-1",
+      "replicate": 3,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-09",
+      "case_id": "late-B-97",
+      "replicate": 3,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-10",
+      "case_id": "late-B-97",
+      "replicate": 3,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-11",
+      "case_id": "late-B-97",
+      "replicate": 5,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-12",
+      "case_id": "late-B-97",
+      "replicate": 5,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-13",
+      "case_id": "ambiguous-B-1",
+      "replicate": 2,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-14",
+      "case_id": "ambiguous-B-1",
+      "replicate": 2,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-15",
+      "case_id": "basic-B-5",
+      "replicate": 4,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-16",
+      "case_id": "basic-B-5",
+      "replicate": 4,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-17",
+      "case_id": "early-B-97",
+      "replicate": 2,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-18",
+      "case_id": "early-B-97",
+      "replicate": 2,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-19",
+      "case_id": "late-B-97",
+      "replicate": 1,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-20",
+      "case_id": "late-B-97",
+      "replicate": 1,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-21",
+      "case_id": "ambiguous-B-1",
+      "replicate": 4,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-22",
+      "case_id": "ambiguous-B-1",
+      "replicate": 4,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-23",
+      "case_id": "basic-B-5",
+      "replicate": 5,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-24",
+      "case_id": "basic-B-5",
+      "replicate": 5,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-25",
+      "case_id": "basic-B-5",
+      "replicate": 3,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-26",
+      "case_id": "basic-B-5",
+      "replicate": 3,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-27",
+      "case_id": "basic-B-5",
+      "replicate": 1,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-28",
+      "case_id": "basic-B-5",
+      "replicate": 1,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-29",
+      "case_id": "early-B-97",
+      "replicate": 1,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-30",
+      "case_id": "early-B-97",
+      "replicate": 1,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-31",
+      "case_id": "ambiguous-B-1",
+      "replicate": 1,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-32",
+      "case_id": "ambiguous-B-1",
+      "replicate": 1,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-33",
+      "case_id": "early-B-97",
+      "replicate": 5,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-34",
+      "case_id": "early-B-97",
+      "replicate": 5,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-35",
+      "case_id": "late-B-97",
+      "replicate": 2,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-36",
+      "case_id": "late-B-97",
+      "replicate": 2,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-37",
+      "case_id": "early-B-97",
+      "replicate": 4,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-38",
+      "case_id": "early-B-97",
+      "replicate": 4,
+      "implementation": "early"
+    },
+    {
+      "job_id": "job-39",
+      "case_id": "basic-B-5",
+      "replicate": 2,
+      "implementation": "baseline"
+    },
+    {
+      "job_id": "job-40",
+      "case_id": "basic-B-5",
+      "replicate": 2,
+      "implementation": "early"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "algorithm": "sha256",
+  "files": {
+    "enigma_lab/__init__.py": "ca57873fe6a01dffb1b6c06af02e613fdd89552d75f85386adcdac52d5d92cf0",
+    "enigma_lab/__main__.py": "8bbe0ce23837a22d2c7fe17ed7737a4175c04fbe61e13693e97d9305273fc60d",
+    "enigma_lab/cli.py": "e1c81d77fc2447f144009d3e2d74ae59b331f4b95ca85b551aa5bd7aa8fb1f98",
+    "enigma_lab/engine.py": "b98d66aff10436cdfa5aa67f0697447b0e2b86930ca6c9350ef5fcc03d64401f",
+    "enigma_lab/search.py": "c79f55b9d42885e2c47915b78200d7926b55e97e4f6718c828db15122109e952",
+    "enigma_lab/search_early.py": "5191106a9183d04ed3a1a85d691c93c1c586cf93aeffe03e0d30cf5f20f163dc",
+    "enigma_lab/specs.py": "39b1c4c4d312604b9a3b48c497e0fe34c126eae75f61dfbd5c9e9fd775a3a273",
+    "experiments/search-latency-v1/benchmark_search.py": "79324cdc08b4ecc7179749d757c99bb38c08b9e93016f2ed773f6a5b66d192a6",
+    "experiments/search-latency-v1/plan.json": "1b637a306868ae1fdc294b4c084d34e015dd36835622535fe5bd7dc3ea8086c1",
+    "experiments/search-latency-v1/inputs.json": "6a0c3a8992a622b7d617290af74e6bb78e1e9919c2e8ea8eeb1ac65561c16339",
+    "experiments/search-latency-v1/INPUT_PROVENANCE.json": "e71f2a85367f00d5e260fc5070f2bc1b0b614c90063c794bae1c3ef4b3576d86",
+    "tests/fixtures/oracle_fixtures.json": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561"
+  }
+}

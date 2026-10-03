@@ -1,0 +1,51 @@
+{
+  "source_path": "tests/fixtures/oracle_fixtures.json",
+  "source_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+  "oracle": {
+    "name": "py-enigma",
+    "version": "1.0.2",
+    "artifact_sha256": "84e9bb019450d6b65d0bde2cba234190587378a064259d02ecf41aa41a508b07",
+    "artifact_url": "https://files.pythonhosted.org/packages/2e/c5/e9afccf7638c2fd1c085606288094cd0a4edeefd056cf42aa32bada75029/py_enigma-1.0.2-py3-none-any.whl",
+    "license": "MIT"
+  },
+  "case_sources": [
+    {
+      "case_id": "basic-B-5",
+      "fixture_id": "published-basic-B",
+      "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+      "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+      "complete_match_reference": "Independent Py-Enigma full-domain enumeration"
+    },
+    {
+      "case_id": "ambiguous-B-1",
+      "fixture_id": "seeded-01",
+      "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+      "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+      "complete_match_reference": "Untimed baseline/early differential preflight"
+    },
+    {
+      "case_id": "early-B-97",
+      "fixture_id": "seeded-03",
+      "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+      "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+      "complete_match_reference": "Untimed baseline/early differential preflight"
+    },
+    {
+      "case_id": "late-B-97",
+      "fixture_id": "seeded-03",
+      "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+      "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+      "complete_match_reference": "Untimed baseline/early differential preflight"
+    }
+  ],
+  "scope": "Four fixed workloads, three ciphertexts, reflector B; not representative historical traffic.",
+  "unchanged_baseline": {
+    "path": "enigma_lab/search.py",
+    "sha256": "c79f55b9d42885e2c47915b78200d7926b55e97e4f6718c828db15122109e952"
+  },
+  "notices": [
+    "tests/fixtures/PY_ENIGMA_LICENSE.txt",
+    "tests/fixtures/README.txt"
+  ],
+  "boundary": "Only basic-B-5 has an independent full-domain match set. Other fixtures support known-key encryption."
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "basic-B-5",
+      "settings": {
+        "rotors": [
+          "I",
+          "II",
+          "III"
+        ],
+        "reflector": "B",
+        "rings": "AAA",
+        "positions": "AAA",
+        "plugboard": []
+      },
+      "ciphertext": "BDZGO",
+      "crib": "AAAAA",
+      "offset": 0,
+      "known_initial_windows": "AAA",
+      "provenance": {
+        "fixture_id": "published-basic-B",
+        "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+        "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+        "complete_match_reference": "Independent Py-Enigma full-domain enumeration"
+      },
+      "independent_expected_matches": [
+        "AAA"
+      ]
+    },
+    {
+      "id": "ambiguous-B-1",
+      "settings": {
+        "rotors": [
+          "I",
+          "II",
+          "IV"
+        ],
+        "reflector": "B",
+        "rings": "RZN",
+        "positions": "IED",
+        "plugboard": []
+      },
+      "ciphertext": "O",
+      "crib": "V",
+      "offset": 0,
+      "known_initial_windows": "IED",
+      "provenance": {
+        "fixture_id": "seeded-01",
+        "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+        "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+        "complete_match_reference": "Untimed baseline/early differential preflight"
+      }
+    },
+    {
+      "id": "early-B-97",
+      "settings": {
+        "rotors": [
+          "I",
+          "II",
+          "III"
+        ],
+        "reflector": "B",
+        "rings": "WKZ",
+        "positions": "VFW",
+        "plugboard": [
+          "EC",
+          "XP",
+          "AK",
+          "GV",
+          "US",
+          "TM"
+        ]
+      },
+      "ciphertext": "KSMCUUJGHLKTTPCDJAQZOQZHXYXOYUSLCSVELIVVUEWPLJSAARNJGPETNFQOJYVXMZXKFAKUKBRUHKBFZVBQKCEAKTHCSIWVL",
+      "crib": "JYVPKVUXSMVZ",
+      "offset": 0,
+      "known_initial_windows": "VFW",
+      "provenance": {
+        "fixture_id": "seeded-03",
+        "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+        "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+        "complete_match_reference": "Untimed baseline/early differential preflight"
+      }
+    },
+    {
+      "id": "late-B-97",
+      "settings": {
+        "rotors": [
+          "I",
+          "II",
+          "III"
+        ],
+        "reflector": "B",
+        "rings": "WKZ",
+        "positions": "VFW",
+        "plugboard": [
+          "EC",
+          "XP",
+          "AK",
+          "GV",
+          "US",
+          "TM"
+        ]
+      },
+      "ciphertext": "KSMCUUJGHLKTTPCDJAQZOQZHXYXOYUSLCSVELIVVUEWPLJSAARNJGPETNFQOJYVXMZXKFAKUKBRUHKBFZVBQKCEAKTHCSIWVL",
+      "crib": "HGTVCAIZABCK",
+      "offset": 85,
+      "known_initial_windows": "VFW",
+      "provenance": {
+        "fixture_id": "seeded-03",
+        "oracle_sha256": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561",
+        "external_evidence": "Pinned Py-Enigma known-key plaintext/ciphertext and windows",
+        "complete_match_reference": "Untimed baseline/early differential preflight"
+      }
+    }
+  ]
+}

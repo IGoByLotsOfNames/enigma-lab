@@ -1,0 +1,40 @@
+RUN THE ENIGMA SEARCH COMPARISON
+
+The completed measurements are in MEASURED_RESULTS.txt. Repeating the timed
+experiment is optional and separate from ordinary tests and the browser demo.
+The commands below use the frozen source, inputs and plan in this repository.
+
+With Python 3.12+ selected, run from the repository root:
+
+    python -B -X utf8 experiments/search-latency-v1/benchmark_search.py run experiments/search-latency-v1
+
+The controller verifies all complete candidate sets before timing. It then runs
+40 fresh workers sequentially, printing progress after each scheduled job. Each
+worker makes one warm-up and two timed searches. A full-domain 97-letter search
+requires substantial work; the recorded timings do not promise a future duration.
+
+Keep power mode and power source consistent, record substantial background work
+or interruptions, and avoid changing source or inputs mid-run. Optional flags
+following the experiment-directory argument record context:
+
+    --power-mode 'your actual mode'
+    --power-source 'plugged in or battery'
+    --background-activity 'your actual conditions'
+
+These flags record conditions; they do not change machine settings. Omitted
+conditions remain unreported. Use the RESULTS_TEMPLATE.txt checklist when sharing
+an independently repeated experiment.
+
+If a run fails or is interrupted, retain the error and saved results. Incomplete
+runs do not support a complete comparison. Rerunning creates a new directory and
+preserves existing attempts. A hash mismatch means the frozen inputs have changed;
+do not rewrite the lock to suppress it.
+
+Untimed correctness verification only:
+
+    python -B -X utf8 experiments/search-latency-v1/benchmark_search.py validate experiments/search-latency-v1
+
+The timed run repeats its preflight, so the separate validate command is optional.
+EXPERIMENT.txt explains the timer boundary, pairing, statistics and limitations.
+Application runtime uses the standard library; no third-party packages are needed
+for this benchmark. Match the recorded Python/runtime context when comparing runs.

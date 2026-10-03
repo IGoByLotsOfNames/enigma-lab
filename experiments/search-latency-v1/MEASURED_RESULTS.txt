@@ -1,0 +1,120 @@
+ENIGMA COMPLETE-SEARCH LATENCY — RECORDED RESULTS
+Completed 4 October 2026 (Asia/Singapore)
+Run: 20261003T161112Z-ac8a3d94
+Local start: 2026-10-04T00:11:12.586989+08:00
+Local finish: 2026-10-04T00:18:05.574078+08:00
+
+EXPERIMENT RECORD
+All 40 scheduled workers completed, with one warm-up and two timed calls each.
+All 80 timed calls are retained and verified. The 40 standalone worker receipts
+exactly match the embedded results and declared order. All 12 frozen source/input
+hashes, the lock and preflight hash match. Worker metadata agrees throughout;
+all worker stdout/stderr logs are empty. Full candidate sets agree with preflight.
+The summaries below were recalculated without importing the benchmark aggregator.
+No benchmark was rerun, recorded sample filtered or workload changed for this review.
+The local results directory contained only this one run at review time.
+
+MEASUREMENT UNIT
+Milliseconds per complete 17,576-position search API call. Each process mean is
+the average of two timed calls; five fresh process means form each table row.
+Sample SD and variance use n-1, with n=5. They describe between-process dispersion,
+not request-tail latency, confidence intervals or ten independent observations.
+
+case | implementation | n | mean ms | median ms | sample SD ms | sample variance ms^2
+basic-B-5 | baseline | 5 | 432.994140 | 405.992950 | 50.900660 | 2590.877145
+basic-B-5 | early | 5 | 141.440740 | 133.681550 | 16.689655 | 278.544598
+ambiguous-B-1 | baseline | 5 | 132.751590 | 130.364050 | 16.381972 | 268.369005
+ambiguous-B-1 | early | 5 | 140.355140 | 150.071800 | 17.227000 | 296.769518
+early-B-97 | baseline | 5 | 7541.028040 | 8256.589450 | 1092.585109 | 1193742.219400
+early-B-97 | early | 5 | 161.815640 | 172.357100 | 25.859679 | 668.723021
+late-B-97 | baseline | 5 | 7886.374910 | 7713.070050 | 1157.024710 | 1338706.180014
+late-B-97 | early | 5 | 8499.794550 | 8730.073800 | 1161.902623 | 1350017.705055
+
+PAIRED COMPARISON
+Delta = early process mean minus baseline process mean (negative is lower time).
+Ratio = baseline process mean / early process mean. Each summary uses five paired
+values. The mean paired ratio differs from the ratio of the two grand means.
+
+case | mean delta ms | delta SD ms | mean paired ratio | ratio SD | early faster pairs
+basic-B-5 | -291.553400 | 48.853508 | 3.084098 | 0.412749 | 5/5
+ambiguous-B-1 | 7.603550 | 11.631211 | 0.948872 | 0.076627 | 1/5
+early-B-97 | -7379.212400 | 1084.336901 | 47.304090 | 7.864828 | 5/5
+late-B-97 | 613.419640 | 1469.310404 | 0.938939 | 0.162918 | 2/5
+
+FINDINGS
+- Basic five-letter case: 432.994 ms -> 141.441 ms; mean paired ratio 3.084x.
+  Early rejection took less time in all five paired comparisons.
+- One-letter ambiguous case: 132.752 ms -> 140.355 ms, a 5.73% increase in the observed
+  grand mean. Early was slower in 4/5 pairs; the paired deltas remain variable.
+- 97 letters, first 12 plaintext letters known: 7541.028 ms -> 161.816 ms; mean paired
+  ratio 47.304x, sample SD 7.865. Early was faster in all five pairs. The ratio of
+  grand means is 46.603x; do not confuse it with the 47.304x mean paired ratio.
+- The same 97-letter message with last 12 letters known: 7886.375 ms -> 8499.795 ms,
+  a 7.78% increase in the observed grand mean. Early was slower in 3/5 pairs and
+  faster in 2/5. Delta SD 1469.310 ms exceeds mean delta 613.420 ms; this one run does
+  not establish a stable universal regression, nor improvement, for late cribs.
+
+EXACT WORK ACCOUNTING (SEPARATE FROM TIMING)
+case | matching starts | baseline transformations | early transformations | reduction
+basic-B-5 | 1 | 87880 | 18306 | 79.1693%
+ambiguous-B-1 | 714 | 17576 | 17576 | 0.0000%
+early-B-97 | 2 | 1704872 | 18337 | 98.9244%
+late-B-97 | 2 | 1704872 | 1512286 | 11.2962%
+
+INTERPRETATION
+Early rejection stops cipher work after the first crib mismatch. It saves most
+work when the crib starts immediately; a late crib still requires every prefix
+keypress. The one-letter case offers no transformation reduction at all.
+The optional implementation calls key_press for each letter, which normalizes and
+checks each character; baseline.process validates each whole candidate message
+and loops internally. Those different costs are part of the measured API calls.
+Per-character overhead plausibly offsets modest work
+savings in short/late cases. This was not a profiler experiment and does not
+attribute a measured fraction of runtime to validation, allocation or CPU effects.
+
+Both 97-letter cases preserve two valid starts, UEW and VFW. In the implemented model,
+with rotors I-II-III, UEW has the middle rotor at its E notch, so its pre-key step
+moves left and middle as well as right, giving VFX. VFW moves only right, also to
+VFX. The two states coincide before the first signal under these fixed settings.
+Therefore a longer crib cannot distinguish those starts in this model; two
+answers are not evidence of failed search. The one-letter case has 714 matches.
+
+MACHINE CONDITIONS
+Recorded: 3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]
+OS: Windows-11-10.0.26200-SP0; architecture: AMD64
+Processor descriptor: Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+Logical CPUs: 16; normal GC enabled.
+Timer: QueryPerformanceCounter via perf_counter_ns; recorded resolution 100 ns.
+Timer units/resolution are not an accuracy guarantee for each measurement.
+Author-reported context after execution: Performance mode; no substantial background
+activity. Plugged-in versus battery state was not reported. This context is saved
+as an addendum; the original run metadata saying 'not reported' is preserved.
+
+SCOPE
+One machine, one run, four fixed workloads using three ciphertexts, wide reflector B.
+The baseline is the corrected full-message search, not the unfinished
+historical prototype or wartime hardware. Only basic-B-5 has an independently
+enumerated full match set; seeded cases combine external known-key message
+fixtures with differential full-domain search checks. No pooled universal speedup,
+historical hardware claim, request-tail estimate, confidence interval or hypothesis
+test is reported. Case order, warm-up policy and source remain as frozen before measurement.
+
+ENGINEERING DECISION
+Retain both implementations and describe early rejection as workload dependent.
+The CLI retains the baseline. The current local browser exposes both strategies
+with explicit selection; its batched execution differs from the measured API calls. Four cases do not justify inventing an automatic cutoff,
+claiming 47x for every search, or dropping unfavorable results.
+
+REPRODUCIBILITY MATERIAL
+All 80 timed observations, worker/run hashes and recalculated statistics are in
+docs/evidence/search-latency-results.json from the repository root.
+The source archive retains original receipts; the public record removes local
+machine paths without dropping measurements.
+
+Protocol: EXPERIMENT.txt. Inputs and schedule: inputs.json and plan.json.
+Reproduction commands: RUN_ME.txt. The code/input lock is unchanged.
+Plan SHA256: 1b637a306868ae1fdc294b4c084d34e015dd36835622535fe5bd7dc3ea8086c1
+Lock SHA256: f62705fb82d300b4f624b454ff3a9052bdcbe7c29e7b3b3363ab76685988bcbf
+
+This result review did not rerun or modify the timed experiment. Ordinary tests
+and browser checks are documented separately in TESTING.txt at the repository root.
