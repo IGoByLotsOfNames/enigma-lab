@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "assembled_utc": "2026-10-03T17:33:24.335311+00:00",
+  "evidence_status": "Dated pre-publication evidence assembled from original local receipts; integration checks are recorded separately in integration-verification.json.",
+  "test_run": {
+    "id": "20261003T165211Z-75bb131f",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "tools": {
+      "ruff": "0.16.10",
+      "coverage": "7.16.2"
+    },
+    "unittest_methods_passed": 151,
+    "checks_passed": [
+      "format",
+      "lint",
+      "tests",
+      "coverage-json",
+      "coverage-report"
+    ],
+    "coverage_scope": [
+      "enigma_lab",
+      "enigma_demo"
+    ],
+    "coverage_totals": {
+      "covered_lines": 705,
+      "num_statements": 725,
+      "percent_covered": 96.46201873048908,
+      "percent_covered_display": "96.46",
+      "missing_lines": 20,
+      "excluded_lines": 0,
+      "percent_statements_covered": 97.24137931034483,
+      "percent_statements_covered_display": "97.24",
+      "num_branches": 236,
+      "num_partial_branches": 12,
+      "covered_branches": 222,
+      "missing_branches": 14,
+      "percent_branches_covered": 94.0677966101695,
+      "percent_branches_covered_display": "94.07"
+    },
+    "original_receipt_sha256": "a0a89a573bc2fcb735cf611145365818a9b8c8e3d1c2b1c947277b4fe2dd9b5f",
+    "unit_test_log_sha256": "d0e13054b7297d8d4102bac6d336a4631338c2f992140a8beb5d3fe18f09bc29",
+    "coverage_report_sha256": "e7ddba956fe74989129c82c9674afdafdc33f6b86a3f54407846ec4e4782544e",
+    "python_source_sha256": {
+      "enigma_demo/__init__.py": "143eeb2b36155e3e2b809274e29cf5919c1d0c2b2577fb9c5eb529315a3cecd1",
+      "enigma_demo/__main__.py": "a1cdbd723b39b7c6fc76a96a0ae4070002b18c8d134afecb3290009253fb31e9",
+      "enigma_demo/jobs.py": "a5164befd7735cb9bb5edc55cf24f9684b87720d5af456e597d3553ffbf1e45d",
+      "enigma_demo/server.py": "8572f19c2770f0688e698fc104a9b6d880a75e308cb66849adca0f1b727172c6",
+      "enigma_demo/service.py": "efd6538020a9fc2de42bd452d077f83b8b6866ff67cc85494438c321af977cfd",
+      "enigma_lab/__init__.py": "ca57873fe6a01dffb1b6c06af02e613fdd89552d75f85386adcdac52d5d92cf0",
+      "enigma_lab/__main__.py": "8bbe0ce23837a22d2c7fe17ed7737a4175c04fbe61e13693e97d9305273fc60d",
+      "enigma_lab/cli.py": "e1c81d77fc2447f144009d3e2d74ae59b331f4b95ca85b551aa5bd7aa8fb1f98",
+      "enigma_lab/engine.py": "b98d66aff10436cdfa5aa67f0697447b0e2b86930ca6c9350ef5fcc03d64401f",
+      "enigma_lab/search.py": "c79f55b9d42885e2c47915b78200d7926b55e97e4f6718c828db15122109e952",
+      "enigma_lab/search_early.py": "5191106a9183d04ed3a1a85d691c93c1c586cf93aeffe03e0d30cf5f20f163dc",
+      "enigma_lab/specs.py": "39b1c4c4d312604b9a3b48c497e0fe34c126eae75f61dfbd5c9e9fd775a3a273"
+    }
+  },
+  "browser": {
+    "method": "Manual interaction and DOM/screenshot verification using the Codex built-in browser tools; not an automated browser regression suite.",
+    "checks": [
+      {
+        "case": "default_transform",
+        "observed": "AAAAA -> BDZGO; final AAF; first trace AAA -> AAB; nine ordered signal stages"
+      },
+      {
+        "case": "double_step",
+        "observed": "AAA -> DKR; navigation to third key shows AEW -> BFX, all three rotors moved"
+      },
+      {
+        "case": "nondefault_transform",
+        "observed": "BLA -> KCH; II-IV-V, rings BUL, start WXC, ten plugboard pairs"
+      },
+      {
+        "case": "basic_search",
+        "observed": "Complete 17,576/17,576; AAA; 87,880 letter transformations"
+      },
+      {
+        "case": "ambiguous_search",
+        "observed": "Complete 17,576/17,576; 714 actual rendered match items; first ABK, last ZZK"
+      },
+      {
+        "case": "no_matches",
+        "observed": "Complete 17,576/17,576; 0 matches, represented as successful complete search"
+      },
+      {
+        "case": "early_fragment",
+        "observed": "Complete; both UEW and VFW rendered using early rejection"
+      },
+      {
+        "case": "late_fragment",
+        "observed": "Complete; both UEW and VFW rendered using baseline"
+      },
+      {
+        "case": "cancel",
+        "observed": "Active configuration locked; cancel available; server-confirmed cancelled at 960 candidates in first check, 896 in final wording check; incomplete, matches hidden, run re-enabled"
+      },
+      {
+        "case": "stale_results",
+        "observed": "Editing completed search hides reference expectation and labels displayed result as previous; completed result retains its request. Editing cancelled search labels previous incomplete progress without promising a request snapshot"
+      },
+      {
+        "case": "validation",
+        "observed": "AB sharp-s rejected as invalid ASCII; duplicate I-I-III rejected; focus moves to relevant invalid field; subsequent valid example works"
+      },
+      {
+        "case": "reference_count",
+        "observed": "Final ambiguity sample displays saved expectation of 714"
+      },
+      {
+        "case": "desktop_layout",
+        "observed": "Split configuration/results layout readable; reflector B/C no longer clipped; full-page transform/search screenshots saved"
+      },
+      {
+        "case": "narrow_layout",
+        "observed": "390x844 viewport override; content width and scrollWidth both375 after scrollbar; no horizontal overflow; stacked form/results and ordered signal rows readable; override reset"
+      },
+      {
+        "case": "console_before_failure_test",
+        "observed": "No captured browser error/warning logs before deliberate server interruption"
+      },
+      {
+        "case": "connection_loss",
+        "observed": "Interrupted staging server during 256-letter baseline search. UI says Unknown/connection interrupted, last progress4608, settings locked, matches hidden; it does not claim success or confirmed cancellation"
+      }
+    ],
+    "limits": [
+      "No full cross-browser or screen-reader audit.",
+      "Deadline and injected server failures are tested at Python boundaries, not by a 60-second browser wait.",
+      "No browser latency benchmark or new speedup measurement.",
+      "Network interruption intentionally produced failed local requests after the clean-console observation.",
+      "Automated Python tests and manual browser checks are distinct evidence."
+    ],
+    "frontend_asset_sha256": {
+      "enigma_demo/static/app.css": "12fa858421d60fa51d6d18df5a7c2eae037ea1523b0cd1b05336bbb86207d9b1",
+      "enigma_demo/static/app.js": "5a2b39ef711e4c49979403dbec8f1e942dd7b7445c0a20d29f9aacca5f7fa69d",
+      "enigma_demo/static/index.html": "0230a9242380d302db5d7b10903758e358c864cc9063a24ef7fe5fd500958d36"
+    },
+    "original_receipt_sha256": "54d6aa1ad8eaa5d17c6ba1d4b9eae6644e9353991cd5428a1e784a4fed7029fd",
+    "canonical_launch_receipt_sha256": "2e323618aa3087460b9790e6032afa57ad61f6e42a434c495ed47b157f00614d",
+    "screenshot_sha256": "c447b417ee81e350c1943edad21d16d64f14296413d1e9fc439b1fd074d735e6",
+    "scope_note": "Manual browser evidence is separate from Python coverage; final static-only corrections followed the Python test run."
+  },
+  "benchmark": {
+    "user_run_id": "20261003T161112Z-ac8a3d94",
+    "workers": 40,
+    "timed_calls": 80,
+    "frozen_file_count": 12,
+    "retained_raw_file_count": 122,
+    "summary_path": "experiments/search-latency-v1/MEASURED_RESULTS.txt",
+    "lock_sha256": "f62705fb82d300b4f624b454ff3a9052bdcbe7c29e7b3b3363ab76685988bcbf",
+    "measurement_review_sha256": "01d80bb70aae909c31d195d0bfe70663808830b40b028dec563c92a0d85ba5fd",
+    "original_summary_sha256": "e19e413c1932a1d4126574f1c66310d832ee25d9dac03face3af0079cfe3f682",
+    "public_summary_sha256": "13ae6a3b7a43071680fa44822ed1b20c7cad5fb6b64ce1c1c441c3440783a11d",
+    "publication_note": "Measured values are unchanged. Public summary prose was simplified and local audit paths removed; original summary hash remains for provenance."
+  },
+  "history": {
+    "motivation_source": "Author report retained in the enclosing project history",
+    "original_filename": "Enigma M3 Decrypter.py",
+    "original_creation_date": "unknown",
+    "original_achieved_outcome": "unknown",
+    "original_sha256": "f962ebf13379011174bba0f0e173f86bc3649c7fd2fcf23c29f890ddab90e08d"
+  },
+  "limits": [
+    "Summary hashes provide traceability, not third-party attestation or a tamper-proof signature.",
+    "Full audit receipts and diagnostic logs remain private; portable timed observations are in search-latency-results.json.",
+    "Remote CI had not run at the time of this original receipt. See current repository Actions separately; no physical-machine validation is established.",
+    "Revision results must not be attributed to the unfinished historical prototype."
+  ]
+}

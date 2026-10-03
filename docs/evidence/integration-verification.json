@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-10-03T18:05:33.876700+00:00",
+  "scope": "Fresh checks against the selected public source before GitHub publication; benchmark timings were not rerun.",
+  "local_suite": {
+    "unittest_methods_passed": 151,
+    "checks": [
+      {
+        "name": "format",
+        "exit_code": 0
+      },
+      {
+        "name": "lint",
+        "exit_code": 0
+      },
+      {
+        "name": "tests",
+        "exit_code": 0
+      },
+      {
+        "name": "coverage-json",
+        "exit_code": 0
+      },
+      {
+        "name": "coverage-report",
+        "exit_code": 0
+      }
+    ],
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "tools": {
+      "ruff": "0.16.10",
+      "coverage": "7.16.2"
+    },
+    "coverage_scope": [
+      "enigma_lab",
+      "enigma_demo"
+    ],
+    "covered_python_modules": 12,
+    "coverage_totals": {
+      "covered_lines": 705,
+      "num_statements": 725,
+      "percent_covered": 96.46201873048908,
+      "percent_covered_display": "96.46",
+      "missing_lines": 20,
+      "excluded_lines": 0,
+      "percent_statements_covered": 97.24137931034483,
+      "percent_statements_covered_display": "97.24",
+      "num_branches": 236,
+      "num_partial_branches": 12,
+      "covered_branches": 222,
+      "missing_branches": 14,
+      "percent_branches_covered": 94.0677966101695,
+      "percent_branches_covered_display": "94.07"
+    },
+    "original_receipt_sha256": "0178472e630dfaf9e28a55c01b60b0394ead38e1e8a826f2fc38df292deec3f0",
+    "python_source_sha256": {
+      "enigma_demo/__init__.py": "143eeb2b36155e3e2b809274e29cf5919c1d0c2b2577fb9c5eb529315a3cecd1",
+      "enigma_demo/__main__.py": "a1cdbd723b39b7c6fc76a96a0ae4070002b18c8d134afecb3290009253fb31e9",
+      "enigma_demo/jobs.py": "a5164befd7735cb9bb5edc55cf24f9684b87720d5af456e597d3553ffbf1e45d",
+      "enigma_demo/server.py": "8572f19c2770f0688e698fc104a9b6d880a75e308cb66849adca0f1b727172c6",
+      "enigma_demo/service.py": "efd6538020a9fc2de42bd452d077f83b8b6866ff67cc85494438c321af977cfd",
+      "enigma_lab/__init__.py": "ca57873fe6a01dffb1b6c06af02e613fdd89552d75f85386adcdac52d5d92cf0",
+      "enigma_lab/__main__.py": "8bbe0ce23837a22d2c7fe17ed7737a4175c04fbe61e13693e97d9305273fc60d",
+      "enigma_lab/cli.py": "e1c81d77fc2447f144009d3e2d74ae59b331f4b95ca85b551aa5bd7aa8fb1f98",
+      "enigma_lab/engine.py": "b98d66aff10436cdfa5aa67f0697447b0e2b86930ca6c9350ef5fcc03d64401f",
+      "enigma_lab/search.py": "c79f55b9d42885e2c47915b78200d7926b55e97e4f6718c828db15122109e952",
+      "enigma_lab/search_early.py": "5191106a9183d04ed3a1a85d691c93c1c586cf93aeffe03e0d30cf5f20f163dc",
+      "enigma_lab/specs.py": "39b1c4c4d312604b9a3b48c497e0fe34c126eae75f61dfbd5c9e9fd775a3a273"
+    }
+  },
+  "browser_check": {
+    "date_local": "2026-10-04",
+    "timezone": "Asia/Singapore",
+    "method": "Manual interaction with the local application in the Codex built-in browser; separate from Python tests and coverage.",
+    "observations": [
+      {
+        "case": "Default transform",
+        "observed": "AAAAA -> BDZGO; final windows AAF"
+      },
+      {
+        "case": "Double stepping",
+        "observed": "AAA -> DKR; final windows BFX; third-character trace AEW -> BFX"
+      },
+      {
+        "case": "Complete baseline search",
+        "observed": "All 17,576 starting windows checked; match AAA"
+      },
+      {
+        "case": "Cancellation",
+        "observed": "97-letter baseline search cancelled at 14,208 candidates; interface labelled result incomplete and showed no partial matches"
+      },
+      {
+        "case": "Screenshot",
+        "observed": "Existing workbench image visually inspected against application and retained"
+      }
+    ],
+    "limits": [
+      "No automated browser regression suite or full cross-browser audit.",
+      "Cancellation progress is one observed run, not a deterministic performance claim."
+    ],
+    "frontend_asset_sha256": {
+      "enigma_demo/static/app.css": "12fa858421d60fa51d6d18df5a7c2eae037ea1523b0cd1b05336bbb86207d9b1",
+      "enigma_demo/static/app.js": "5a2b39ef711e4c49979403dbec8f1e942dd7b7445c0a20d29f9aacca5f7fa69d",
+      "enigma_demo/static/index.html": "0230a9242380d302db5d7b10903758e358c864cc9063a24ef7fe5fd500958d36"
+    }
+  },
+  "benchmark_review": {
+    "workers": 40,
+    "timed_calls": 80,
+    "frozen_files": 12,
+    "all_worker_receipts_match_embedded_results": true,
+    "all_frozen_file_hashes_match": true,
+    "all_workloads_retained": true,
+    "observations_path": "docs/evidence/search-latency-results.json",
+    "observations_sha256": "31850a26291f690461b5d1be92ff69487c66d7799fb6fb312bcb5fad7795f22e",
+    "mean_paired_ratio_early_fragment": 47.304089816745126,
+    "note": "Statistics independently recomputed from the recorded observations; no new benchmark measurement."
+  },
+  "publication_boundaries": [
+    "The unfinished historical prototype is preserved separately and is not the corrected benchmark baseline.",
+    "Application-wide licence has not been granted; fixture notices apply only to their identified third-party material.",
+    "Local environments, private audits, raw diagnostic logs and interview preparation are excluded.",
+    "Hosted CI status must be read from the matching published commit; local checks alone do not establish it."
+  ]
+}

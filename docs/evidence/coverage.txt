@@ -1,0 +1,16 @@
+Name                         Stmts   Miss Branch BrPart   Cover   Missing
+-------------------------------------------------------------------------
+enigma_demo\__init__.py          2      0      0      0 100.00%
+enigma_demo\__main__.py         27      1      6      1  93.94%   41
+enigma_demo\jobs.py            132      7     48      5  93.33%   89, 119-121, 186-187, 190, 228->224, 232->231
+enigma_demo\server.py          166      7     52      5  94.50%   42->44, 65, 91->exit, 128, 140, 207, 209, 217-218
+enigma_demo\service.py          46      0     12      0 100.00%
+enigma_lab\__init__.py           2      0      0      0 100.00%
+enigma_lab\__main__.py           3      3      2      0   0.00%   4-7
+enigma_lab\cli.py               53      1      6      0  98.31%   150
+enigma_lab\engine.py           163      0     62      0 100.00%
+enigma_lab\search.py            76      0     26      0 100.00%
+enigma_lab\search_early.py      31      0     14      0 100.00%
+enigma_lab\specs.py             24      1      8      1  93.75%   55
+-------------------------------------------------------------------------
+TOTAL                          725     20    236     12  96.46%

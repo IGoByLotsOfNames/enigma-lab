@@ -1,0 +1,2018 @@
+{
+  "schema_version": 1,
+  "run_id": "20261003T161112Z-ac8a3d94",
+  "started_utc": "2026-10-03T16:11:12.586989+00:00",
+  "finished_utc": "2026-10-03T16:18:05.574078+00:00",
+  "measurement": "Milliseconds per complete 17,576-start-position search API call",
+  "comparison": "Corrected full-message search versus optional first-mismatch rejection",
+  "scope": "One machine, one run, four fixed workloads, wide reflector B; not historical wartime recovery or hardware comparison.",
+  "sampling": {
+    "fresh_worker_processes": 40,
+    "warmup_calls_per_process": 1,
+    "timed_calls_per_process": 2,
+    "total_timed_calls": 80,
+    "process_pairs_per_case": 5,
+    "sd_ddof": 1,
+    "unit": "Process mean of two timed calls; the two calls are not treated as independent processes."
+  },
+  "metadata": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 165 Stepping 2, GenuineIntel",
+    "logical_cpu_count": 16,
+    "timer": {
+      "name": "perf_counter_ns",
+      "implementation": "QueryPerformanceCounter()",
+      "resolution_seconds": 1e-07,
+      "monotonic": true,
+      "adjustable": false
+    },
+    "gc_enabled": true,
+    "gc_thresholds": [
+      700,
+      10,
+      10
+    ]
+  },
+  "original_reported_environment": {
+    "power_mode": "not reported",
+    "power_source": "not reported",
+    "background_activity": "not reported"
+  },
+  "post_run_user_report": {
+    "power_mode": "Performance",
+    "background_activity": "No substantial background activity",
+    "power_source": "Not reported",
+    "status": "User report; not instrumentally verified"
+  },
+  "provenance": {
+    "raw_results_sha256": "c8a5fb0e6ea8b23bf437ce43f18646402ea09511e477aee30a0ef63f82fd5c87",
+    "preflight_sha256": "97cede21bd8edd4f3c80eb4005cef52b7a42c11d7fe3ae1072e04ae2e635fd20",
+    "lock_sha256": "f62705fb82d300b4f624b454ff3a9052bdcbe7c29e7b3b3363ab76685988bcbf",
+    "source_summary_sha256": "e19e413c1932a1d4126574f1c66310d832ee25d9dac03face3af0079cfe3f682",
+    "frozen_files": {
+      "enigma_lab/__init__.py": "ca57873fe6a01dffb1b6c06af02e613fdd89552d75f85386adcdac52d5d92cf0",
+      "enigma_lab/__main__.py": "8bbe0ce23837a22d2c7fe17ed7737a4175c04fbe61e13693e97d9305273fc60d",
+      "enigma_lab/cli.py": "e1c81d77fc2447f144009d3e2d74ae59b331f4b95ca85b551aa5bd7aa8fb1f98",
+      "enigma_lab/engine.py": "b98d66aff10436cdfa5aa67f0697447b0e2b86930ca6c9350ef5fcc03d64401f",
+      "enigma_lab/search.py": "c79f55b9d42885e2c47915b78200d7926b55e97e4f6718c828db15122109e952",
+      "enigma_lab/search_early.py": "5191106a9183d04ed3a1a85d691c93c1c586cf93aeffe03e0d30cf5f20f163dc",
+      "enigma_lab/specs.py": "39b1c4c4d312604b9a3b48c497e0fe34c126eae75f61dfbd5c9e9fd775a3a273",
+      "experiments/search-latency-v1/benchmark_search.py": "79324cdc08b4ecc7179749d757c99bb38c08b9e93016f2ed773f6a5b66d192a6",
+      "experiments/search-latency-v1/plan.json": "1b637a306868ae1fdc294b4c084d34e015dd36835622535fe5bd7dc3ea8086c1",
+      "experiments/search-latency-v1/inputs.json": "6a0c3a8992a622b7d617290af74e6bb78e1e9919c2e8ea8eeb1ac65561c16339",
+      "experiments/search-latency-v1/INPUT_PROVENANCE.json": "e71f2a85367f00d5e260fc5070f2bc1b0b614c90063c794bae1c3ef4b3576d86",
+      "tests/fixtures/oracle_fixtures.json": "f428ed92fae66673fbc1fd368db612a3d7ecfaddfb35ab942aa5e465a0241561"
+    },
+    "derivation": "Recomputed independently from all 40 worker receipts and all 80 timed observations. No benchmark rerun or filtered samples."
+  },
+  "cases": [
+    {
+      "case_id": "basic-B-5",
+      "message_length": 5,
+      "known_fragment_length": 5,
+      "offset_zero_based": 0,
+      "matches": [
+        "AAA"
+      ],
+      "characters_transformed": {
+        "baseline": 87880,
+        "early": 18306
+      },
+      "process_means_ms": {
+        "baseline": [
+          495.49389999999994,
+          405.99295,
+          404.01694999999995,
+          380.4015,
+          479.0654
+        ],
+        "early": [
+          155.86124999999998,
+          133.68155000000002,
+          162.3571,
+          123.89265,
+          131.41115
+        ]
+      },
+      "latency_summary_ms": {
+        "baseline": {
+          "n": 5,
+          "mean": 432.99413999999996,
+          "median": 405.99295,
+          "sample_sd": 50.90065957806194,
+          "sample_variance": 2590.877145481749
+        },
+        "early": {
+          "n": 5,
+          "mean": 141.44074,
+          "median": 133.68155000000002,
+          "sample_sd": 16.689655418716704,
+          "sample_variance": 278.5445979954999
+        }
+      },
+      "paired_baseline_divided_by_early": [
+        3.179070487372583,
+        3.0370155791880027,
+        2.488446455375219,
+        3.0704121673077456,
+        3.6455460590672866
+      ],
+      "paired_ratio_summary": {
+        "n": 5,
+        "mean": 3.0840981496621676,
+        "median": 3.0704121673077456,
+        "sample_sd": 0.4127494746719651,
+        "sample_variance": 0.17036212884198315
+      },
+      "paired_early_minus_baseline_ms": [
+        -339.63264999999996,
+        -272.3114,
+        -241.65984999999995,
+        -256.50885,
+        -347.65425000000005
+      ],
+      "paired_delta_summary_ms": {
+        "n": 5,
+        "mean": -291.5534,
+        "median": -272.3114,
+        "sample_sd": 48.85350814319788,
+        "sample_variance": 2386.6652578975018
+      },
+      "early_faster_pairs": 5,
+      "ratio_of_grand_means": 3.061311330808931
+    },
+    {
+      "case_id": "ambiguous-B-1",
+      "message_length": 1,
+      "known_fragment_length": 1,
+      "offset_zero_based": 0,
+      "matches": [
+        "ABK",
+        "ABO",
+        "ABQ",
+        "ACK",
+        "ADH",
+        "AEA",
+        "AFZ",
+        "AGB",
+        "AIN",
+        "AIT",
+        "AJH",
+        "AJI",
+        "AJO",
+        "AKQ",
+        "ALS",
+        "ANH",
+        "ANJ",
+        "ANR",
+        "APL",
+        "ARO",
+        "AUB",
+        "AVD",
+        "AWG",
+        "AWV",
+        "AYF",
+        "AZP",
+        "BAP",
+        "BBX",
+        "BDU",
+        "BDZ",
+        "BFA",
+        "BGK",
+        "BHQ",
+        "BKT",
+        "BLE",
+        "BMN",
+        "BOT",
+        "BQA",
+        "BQG",
+        "BQR",
+        "BRQ",
+        "BRS",
+        "BRT",
+        "BTL",
+        "BTT",
+        "BUL",
+        "BVQ",
+        "BWU",
+        "BXB",
+        "BYG",
+        "CAM",
+        "CBI",
+        "CCN",
+        "CCX",
+        "CDP",
+        "CEC",
+        "CGO",
+        "CIH",
+        "CJU",
+        "CKU",
+        "CLM",
+        "CMY",
+        "COA",
+        "COB",
+        "CPA",
+        "CPJ",
+        "CPM",
+        "CRC",
+        "CRM",
+        "CRX",
+        "CSH",
+        "CTB",
+        "CUT",
+        "CUV",
+        "CVY",
+        "CWQ",
+        "CYE",
+        "CYO",
+        "CYS",
+        "CYT",
+        "DBZ",
+        "DCB",
+        "DCN",
+        "DDK",
+        "DDR",
+        "DEE",
+        "DFC",
+        "DGJ",
+        "DGU",
+        "DHE",
+        "DIO",
+        "DIP",
+        "DIT",
+        "DKG",
+        "DLL",
+        "DLM",
+        "DOR",
+        "DOS",
+        "DQH",
+        "DQW",
+        "DTH",
+        "DUC",
+        "DUO",
+        "DVX",
+        "DVY",
+        "DWF",
+        "DWY",
+        "DXF",
+        "DXP",
+        "DYA",
+        "DYL",
+        "DYM",
+        "EAK",
+        "EAN",
+        "EAW",
+        "EBK",
+        "EBM",
+        "ECH",
+        "EDM",
+        "EEG",
+        "EFE",
+        "EGY",
+        "EGZ",
+        "EIC",
+        "EIX",
+        "EJR",
+        "EKE",
+        "EME",
+        "ENN",
+        "ENP",
+        "EOQ",
+        "EPO",
+        "EPS",
+        "ERN",
+        "ESB",
+        "ETA",
+        "ETI",
+        "EVD",
+        "EWN",
+        "EXH",
+        "EZE",
+        "FAD",
+        "FAH",
+        "FCV",
+        "FCX",
+        "FCY",
+        "FCZ",
+        "FDE",
+        "FEM",
+        "FES",
+        "FFG",
+        "FGO",
+        "FGV",
+        "FGY",
+        "FIU",
+        "FIW",
+        "FJJ",
+        "FJR",
+        "FKN",
+        "FLN",
+        "FLZ",
+        "FPX",
+        "FQS",
+        "FRM",
+        "FTB",
+        "FTO",
+        "FVC",
+        "FWN",
+        "FWP",
+        "FWQ",
+        "FWS",
+        "FWX",
+        "FXA",
+        "FYT",
+        "GCZ",
+        "GDE",
+        "GFM",
+        "GFS",
+        "GGB",
+        "GHG",
+        "GIL",
+        "GJJ",
+        "GKQ",
+        "GLT",
+        "GLZ",
+        "GMG",
+        "GML",
+        "GMM",
+        "GOT",
+        "GPH",
+        "GPI",
+        "GPS",
+        "GRW",
+        "GSJ",
+        "GUJ",
+        "GVW",
+        "GWG",
+        "GXE",
+        "GXR",
+        "HAL",
+        "HCC",
+        "HDG",
+        "HEJ",
+        "HEP",
+        "HGP",
+        "HIL",
+        "HIT",
+        "HJD",
+        "HKI",
+        "HLL",
+        "HLU",
+        "HON",
+        "HOU",
+        "HQQ",
+        "HQZ",
+        "HRU",
+        "HSN",
+        "HUQ",
+        "HVZ",
+        "HXQ",
+        "HXR",
+        "HYK",
+        "HYR",
+        "IAN",
+        "IBM",
+        "ICY",
+        "IDD",
+        "IDQ",
+        "IED",
+        "IFP",
+        "IGA",
+        "IGB",
+        "IGR",
+        "IIT",
+        "IJZ",
+        "IKA",
+        "IKO",
+        "IKQ",
+        "ILB",
+        "ILF",
+        "IND",
+        "INP",
+        "IPN",
+        "IQK",
+        "IRI",
+        "ITG",
+        "IVH",
+        "IVS",
+        "IWG",
+        "IWK",
+        "IWO",
+        "IZD",
+        "IZE",
+        "JCR",
+        "JCY",
+        "JEQ",
+        "JFD",
+        "JHG",
+        "JHI",
+        "JIM",
+        "JJK",
+        "JLF",
+        "JLN",
+        "JLW",
+        "JMD",
+        "JMI",
+        "JMW",
+        "JNL",
+        "JOL",
+        "JPI",
+        "JQC",
+        "JQJ",
+        "JQS",
+        "JQT",
+        "JSJ",
+        "JSX",
+        "JVS",
+        "JWP",
+        "JYW",
+        "JZF",
+        "KCH",
+        "KDO",
+        "KDV",
+        "KEN",
+        "KEU",
+        "KEW",
+        "KFQ",
+        "KIL",
+        "KIX",
+        "KJO",
+        "KMR",
+        "KNR",
+        "KOE",
+        "KPE",
+        "KQL",
+        "KQW",
+        "KRF",
+        "KRJ",
+        "KRN",
+        "KSB",
+        "KSE",
+        "KTA",
+        "KTK",
+        "KTY",
+        "KUB",
+        "KUK",
+        "KUS",
+        "KVX",
+        "KWI",
+        "KXR",
+        "KYH",
+        "LAO",
+        "LBV",
+        "LBX",
+        "LDZ",
+        "LED",
+        "LFN",
+        "LFU",
+        "LFW",
+        "LHD",
+        "LIH",
+        "LJF",
+        "LKD",
+        "LLC",
+        "LLE",
+        "LLT",
+        "LML",
+        "LMW",
+        "LNL",
+        "LNM",
+        "LOB",
+        "LPA",
+        "LPB",
+        "LPS",
+        "LRK",
+        "LTZ",
+        "LVW",
+        "LXG",
+        "LXZ",
+        "LYY",
+        "LZW",
+        "MAD",
+        "MAP",
+        "MAS",
+        "MBF",
+        "MDF",
+        "MDI",
+        "MEK",
+        "MFD",
+        "MIB",
+        "MJN",
+        "MJX",
+        "MKT",
+        "MLV",
+        "MMD",
+        "MOC",
+        "MOL",
+        "MPJ",
+        "MQM",
+        "MSN",
+        "MTL",
+        "MUH",
+        "MVO",
+        "MWE",
+        "MWU",
+        "MXL",
+        "MYO",
+        "NDN",
+        "NEQ",
+        "NFK",
+        "NGW",
+        "NHF",
+        "NIU",
+        "NLL",
+        "NMF",
+        "NNJ",
+        "NNO",
+        "NNX",
+        "NPF",
+        "NPX",
+        "NRO",
+        "NSI",
+        "NSM",
+        "NTC",
+        "NUN",
+        "NUY",
+        "NVJ",
+        "NWX",
+        "NYC",
+        "NYF",
+        "OBN",
+        "OEY",
+        "OFQ",
+        "OGR",
+        "OHI",
+        "OIU",
+        "OIY",
+        "OJP",
+        "OKK",
+        "OKU",
+        "OMB",
+        "OPE",
+        "OPM",
+        "OPN",
+        "OPS",
+        "OPT",
+        "OPX",
+        "OPY",
+        "ORR",
+        "OSE",
+        "OSF",
+        "OUK",
+        "OUU",
+        "OVH",
+        "OWK",
+        "OWX",
+        "PAA",
+        "PAK",
+        "PAT",
+        "PBH",
+        "PBI",
+        "PCH",
+        "PCN",
+        "PEU",
+        "PFY",
+        "PGO",
+        "PIC",
+        "PIG",
+        "PIL",
+        "PIV",
+        "PIX",
+        "PKS",
+        "PLM",
+        "PNE",
+        "PNN",
+        "PPC",
+        "PQP",
+        "PQY",
+        "PRN",
+        "PRX",
+        "PSB",
+        "PTA",
+        "PTQ",
+        "PUF",
+        "PVY",
+        "PWQ",
+        "PXR",
+        "PXT",
+        "PYN",
+        "PYT",
+        "PZV",
+        "QBQ",
+        "QBU",
+        "QCK",
+        "QEP",
+        "QFU",
+        "QHG",
+        "QHJ",
+        "QHZ",
+        "QIG",
+        "QIN",
+        "QJX",
+        "QKH",
+        "QKS",
+        "QLS",
+        "QLV",
+        "QMV",
+        "QPI",
+        "QQY",
+        "QSJ",
+        "QSM",
+        "QUA",
+        "QVA",
+        "QXN",
+        "QXT",
+        "QYY",
+        "QZA",
+        "QZU",
+        "QZV",
+        "RCQ",
+        "REK",
+        "RFJ",
+        "RFP",
+        "RGG",
+        "RGH",
+        "RGK",
+        "RGN",
+        "RHF",
+        "RIM",
+        "RKJ",
+        "RMA",
+        "RND",
+        "RNZ",
+        "RPJ",
+        "RPP",
+        "RPQ",
+        "RQI",
+        "RRI",
+        "RRZ",
+        "RSL",
+        "RSX",
+        "RUW",
+        "RWM",
+        "RXG",
+        "RYO",
+        "RYW",
+        "RZN",
+        "SAB",
+        "SBW",
+        "SCA",
+        "SFK",
+        "SGB",
+        "SGW",
+        "SGX",
+        "SGY",
+        "SHQ",
+        "SJE",
+        "SJF",
+        "SJR",
+        "SKD",
+        "SKQ",
+        "SLJ",
+        "SQX",
+        "SRS",
+        "SSY",
+        "SUY",
+        "SVA",
+        "SWG",
+        "SWN",
+        "SXD",
+        "SYJ",
+        "SZI",
+        "SZW",
+        "TAQ",
+        "TCL",
+        "TED",
+        "TGJ",
+        "TGQ",
+        "TKK",
+        "TOR",
+        "TOU",
+        "TPK",
+        "TPY",
+        "TPZ",
+        "TQD",
+        "TQH",
+        "TQZ",
+        "TSF",
+        "TSK",
+        "TSZ",
+        "TUP",
+        "TUU",
+        "TVN",
+        "TWD",
+        "TWY",
+        "TXF",
+        "TXK",
+        "TYA",
+        "TYV",
+        "TZR",
+        "TZS",
+        "UBK",
+        "UCD",
+        "UCM",
+        "UCS",
+        "UDF",
+        "UFD",
+        "UHQ",
+        "UIB",
+        "UJD",
+        "ULU",
+        "ULX",
+        "UMD",
+        "UMH",
+        "UNA",
+        "UOG",
+        "UOL",
+        "UON",
+        "URS",
+        "USD",
+        "USO",
+        "UVD",
+        "UXL",
+        "UYR",
+        "UYU",
+        "UZM",
+        "VAG",
+        "VAM",
+        "VAT",
+        "VDM",
+        "VDP",
+        "VGE",
+        "VHV",
+        "VJB",
+        "VKR",
+        "VLQ",
+        "VMC",
+        "VME",
+        "VNE",
+        "VNU",
+        "VOA",
+        "VOI",
+        "VOZ",
+        "VPG",
+        "VPJ",
+        "VPV",
+        "VPZ",
+        "VQP",
+        "VRP",
+        "VTD",
+        "VTI",
+        "VVP",
+        "VVT",
+        "VWA",
+        "VWL",
+        "VWW",
+        "VXK",
+        "VXM",
+        "VYE",
+        "VYO",
+        "VZC",
+        "VZG",
+        "WAD",
+        "WAR",
+        "WBW",
+        "WBY",
+        "WDA",
+        "WJB",
+        "WJG",
+        "WLN",
+        "WMC",
+        "WMJ",
+        "WNU",
+        "WOW",
+        "WQS",
+        "WTD",
+        "WTJ",
+        "WUK",
+        "WVP",
+        "WVR",
+        "WWP",
+        "WZG",
+        "XAN",
+        "XBM",
+        "XDO",
+        "XEE",
+        "XHQ",
+        "XJE",
+        "XJL",
+        "XJM",
+        "XJY",
+        "XKU",
+        "XLR",
+        "XNP",
+        "XNS",
+        "XOT",
+        "XOV",
+        "XOX",
+        "XPM",
+        "XRS",
+        "XSN",
+        "XSV",
+        "XTR",
+        "XUM",
+        "XZE",
+        "YAW",
+        "YCS",
+        "YEO",
+        "YET",
+        "YFE",
+        "YGR",
+        "YGZ",
+        "YHS",
+        "YIJ",
+        "YJS",
+        "YKA",
+        "YKE",
+        "YKZ",
+        "YLF",
+        "YLX",
+        "YPN",
+        "YQW",
+        "YQX",
+        "YSA",
+        "YSO",
+        "YVH",
+        "YVS",
+        "YVU",
+        "YVX",
+        "YVZ",
+        "YXH",
+        "YXX",
+        "YZQ",
+        "YZT",
+        "ZAB",
+        "ZDL",
+        "ZDQ",
+        "ZEZ",
+        "ZFO",
+        "ZFT",
+        "ZHS",
+        "ZIA",
+        "ZIJ",
+        "ZLA",
+        "ZMN",
+        "ZPJ",
+        "ZQR",
+        "ZTJ",
+        "ZXD",
+        "ZXX",
+        "ZXY",
+        "ZYO",
+        "ZYP",
+        "ZZK"
+      ],
+      "characters_transformed": {
+        "baseline": 17576,
+        "early": 17576
+      },
+      "process_means_ms": {
+        "baseline": [
+          115.23689999999999,
+          127.79015,
+          130.36405,
+          130.56675,
+          159.8001
+        ],
+        "early": [
+          116.06174999999999,
+          128.47555,
+          151.19555,
+          150.0718,
+          155.97105
+        ]
+      },
+      "latency_summary_ms": {
+        "baseline": {
+          "n": 5,
+          "mean": 132.75159,
+          "median": 130.36405,
+          "sample_sd": 16.381971943015586,
+          "sample_variance": 268.3690047417499
+        },
+        "early": {
+          "n": 5,
+          "mean": 140.35514,
+          "median": 150.0718,
+          "sample_sd": 17.226999680095197,
+          "sample_variance": 296.769517978
+        }
+      },
+      "paired_baseline_divided_by_early": [
+        0.9928930073861544,
+        0.9946651327820741,
+        0.8622214741108452,
+        0.8700285463358207,
+        1.0245497481744208
+      ],
+      "paired_ratio_summary": {
+        "n": 5,
+        "mean": 0.948871581757863,
+        "median": 0.9928930073861544,
+        "sample_sd": 0.07662666881009449,
+        "sample_variance": 0.005871646372931907
+      },
+      "paired_early_minus_baseline_ms": [
+        0.8248499999999979,
+        0.6854000000000013,
+        20.831500000000005,
+        19.505049999999983,
+        -3.829049999999995
+      ],
+      "paired_delta_summary_ms": {
+        "n": 5,
+        "mean": 7.6035499999999985,
+        "median": 0.8248499999999979,
+        "sample_sd": 11.631211021697178,
+        "sample_variance": 135.2850698312499
+      },
+      "early_faster_pairs": 1,
+      "ratio_of_grand_means": 0.9458263516391348
+    },
+    {
+      "case_id": "early-B-97",
+      "message_length": 97,
+      "known_fragment_length": 12,
+      "offset_zero_based": 0,
+      "matches": [
+        "UEW",
+        "VFW"
+      ],
+      "characters_transformed": {
+        "early": 18337,
+        "baseline": 1704872
+      },
+      "process_means_ms": {
+        "early": [
+          184.53205000000003,
+          172.3571,
+          178.26935,
+          153.41264999999999,
+          120.50704999999999
+        ],
+        "baseline": [
+          6378.80415,
+          8256.58945,
+          8324.80165,
+          8431.0218,
+          6313.9231500000005
+        ]
+      },
+      "latency_summary_ms": {
+        "early": {
+          "n": 5,
+          "mean": 161.81564,
+          "median": 172.3571,
+          "sample_sd": 25.859679443643547,
+          "sample_variance": 668.7230209280006
+        },
+        "baseline": {
+          "n": 5,
+          "mean": 7541.02804,
+          "median": 8256.58945,
+          "sample_sd": 1092.585108538598,
+          "sample_variance": 1193742.2194003
+        }
+      },
+      "paired_baseline_divided_by_early": [
+        34.567459419650945,
+        47.90397059361059,
+        46.69788525060533,
+        54.95649674260891,
+        52.39463707724985
+      ],
+      "paired_ratio_summary": {
+        "n": 5,
+        "mean": 47.304089816745126,
+        "median": 47.90397059361059,
+        "sample_sd": 7.86482831924965,
+        "sample_variance": 61.855524491271275
+      },
+      "paired_early_minus_baseline_ms": [
+        -6194.2721,
+        -8084.232349999999,
+        -8146.5323,
+        -8277.60915,
+        -6193.4161
+      ],
+      "paired_delta_summary_ms": {
+        "n": 5,
+        "mean": -7379.2124,
+        "median": -8084.232349999999,
+        "sample_sd": 1084.3369009332791,
+        "sample_variance": 1175786.5147255883
+      },
+      "early_faster_pairs": 5,
+      "ratio_of_grand_means": 46.60259070136855
+    },
+    {
+      "case_id": "late-B-97",
+      "message_length": 97,
+      "known_fragment_length": 12,
+      "offset_zero_based": 85,
+      "matches": [
+        "UEW",
+        "VFW"
+      ],
+      "characters_transformed": {
+        "early": 1512286,
+        "baseline": 1704872
+      },
+      "process_means_ms": {
+        "early": [
+          8894.25465,
+          9855.181,
+          6674.88975,
+          8730.0738,
+          8344.57355
+        ],
+        "baseline": [
+          6748.36635,
+          7713.07005,
+          6888.1034500000005,
+          8613.33,
+          9469.0047
+        ]
+      },
+      "latency_summary_ms": {
+        "early": {
+          "n": 5,
+          "mean": 8499.79455,
+          "median": 8730.0738,
+          "sample_sd": 1161.902622879841,
+          "sample_variance": 1350017.705055054
+        },
+        "baseline": {
+          "n": 5,
+          "mean": 7886.37491,
+          "median": 7713.07005,
+          "sample_sd": 1157.0247102002375,
+          "sample_variance": 1338706.1800139435
+        }
+      },
+      "paired_baseline_divided_by_early": [
+        0.7587332064975225,
+        0.7826411356625514,
+        1.0319426549329898,
+        0.9866273982701039,
+        1.134749983718461
+      ],
+      "paired_ratio_summary": {
+        "n": 5,
+        "mean": 0.9389388758163257,
+        "median": 0.9866273982701039,
+        "sample_sd": 0.16291788952834643,
+        "sample_variance": 0.02654223872837049
+      },
+      "paired_early_minus_baseline_ms": [
+        2145.8883000000005,
+        2142.1109500000002,
+        -213.21370000000024,
+        116.74380000000019,
+        -1124.4311500000003
+      ],
+      "paired_delta_summary_ms": {
+        "n": 5,
+        "mean": 613.4196400000001,
+        "median": 116.74380000000019,
+        "sample_sd": 1469.3104039220746,
+        "sample_variance": 2158873.06307365
+      },
+      "early_faster_pairs": 2,
+      "ratio_of_grand_means": 0.9278312391680102
+    }
+  ],
+  "workers_in_execution_order": [
+    {
+      "job_id": "job-01",
+      "case_id": "early-B-97",
+      "replicate": 3,
+      "implementation": "early",
+      "worker_receipt_sha256": "21e04b89f3178d4514cfb4fbdf49f9d746b290afb77fe2b9e504fb5c151af201",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 180224200,
+          "elapsed_ms": 180.2242,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 176314500,
+          "elapsed_ms": 176.3145,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 178.26935,
+      "finished_utc": "2026-10-03T16:11:46.703894+00:00"
+    },
+    {
+      "job_id": "job-02",
+      "case_id": "early-B-97",
+      "replicate": 3,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "5680906935be0bfe4734f1c2fa9a69b638c9591c1d38e31e4cd94cfc7e9fe90b",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 8090202000,
+          "elapsed_ms": 8090.202,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 8559401300,
+          "elapsed_ms": 8559.4013,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8324.80165,
+      "finished_utc": "2026-10-03T16:12:11.155712+00:00"
+    },
+    {
+      "job_id": "job-03",
+      "case_id": "ambiguous-B-1",
+      "replicate": 5,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "0512f63b805459e84050c9007fbf544378e87559a659016ec997f00104df4612",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 161954200,
+          "elapsed_ms": 161.9542,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 157646000,
+          "elapsed_ms": 157.646,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 159.8001,
+      "finished_utc": "2026-10-03T16:12:11.963284+00:00"
+    },
+    {
+      "job_id": "job-04",
+      "case_id": "ambiguous-B-1",
+      "replicate": 5,
+      "implementation": "early",
+      "worker_receipt_sha256": "bd74264a749810f651c6f4a261da395f2b644ef1318905e7c8630d443b0d0359",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 158633900,
+          "elapsed_ms": 158.6339,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 153308200,
+          "elapsed_ms": 153.3082,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 155.97105,
+      "finished_utc": "2026-10-03T16:12:12.786199+00:00"
+    },
+    {
+      "job_id": "job-05",
+      "case_id": "late-B-97",
+      "replicate": 4,
+      "implementation": "early",
+      "worker_receipt_sha256": "62ce9e69a812b919d422352d94be60c39812fa164cca1f1b260af1ad12e192be",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 8148044600,
+          "elapsed_ms": 8148.0446,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 9312103000,
+          "elapsed_ms": 9312.103,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8730.0738,
+      "finished_utc": "2026-10-03T16:12:38.536227+00:00"
+    },
+    {
+      "job_id": "job-06",
+      "case_id": "late-B-97",
+      "replicate": 4,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "1d32b058d1739991dce344793bccfa97b3817c63b45b9dfbad6ac7e6e04417f3",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 8567653800,
+          "elapsed_ms": 8567.6538,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 8659006200,
+          "elapsed_ms": 8659.0062,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8613.33,
+      "finished_utc": "2026-10-03T16:13:03.435533+00:00"
+    },
+    {
+      "job_id": "job-07",
+      "case_id": "ambiguous-B-1",
+      "replicate": 3,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "2cf82b50dd49101e8772f57701f4fbafd0a5dec088d80ca69e9d35d40a68b9b9",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 131830300,
+          "elapsed_ms": 131.8303,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 128897800,
+          "elapsed_ms": 128.8978,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 130.36405,
+      "finished_utc": "2026-10-03T16:13:04.196952+00:00"
+    },
+    {
+      "job_id": "job-08",
+      "case_id": "ambiguous-B-1",
+      "replicate": 3,
+      "implementation": "early",
+      "worker_receipt_sha256": "9ef9eed452eb2c9a7b95ed29dfda505c252c500d7720e6ec313ebc3f753ff8a1",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 155317500,
+          "elapsed_ms": 155.3175,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 147073600,
+          "elapsed_ms": 147.0736,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 151.19555,
+      "finished_utc": "2026-10-03T16:13:04.987564+00:00"
+    },
+    {
+      "job_id": "job-09",
+      "case_id": "late-B-97",
+      "replicate": 3,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "27e240d825e4eec1a4874ae42fe06f3622b035327f82317ae4e106a24c39478c",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6961072800,
+          "elapsed_ms": 6961.0728,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 6815134100,
+          "elapsed_ms": 6815.1341,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 6888.1034500000005,
+      "finished_utc": "2026-10-03T16:13:28.559479+00:00"
+    },
+    {
+      "job_id": "job-10",
+      "case_id": "late-B-97",
+      "replicate": 3,
+      "implementation": "early",
+      "worker_receipt_sha256": "5be3a675697aeace77d5f1f46517dba0e95d1a2678a59cfe436592b505b5b909",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6441920600,
+          "elapsed_ms": 6441.9206,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 6907858900,
+          "elapsed_ms": 6907.8589,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 6674.88975,
+      "finished_utc": "2026-10-03T16:13:49.020722+00:00"
+    },
+    {
+      "job_id": "job-11",
+      "case_id": "late-B-97",
+      "replicate": 5,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "96007eb435995b1dc6e4a518178608c8299efb482fcf8c12927266732d4f70c7",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 7418236700,
+          "elapsed_ms": 7418.2367,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 11519772700,
+          "elapsed_ms": 11519.7727,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 9469.0047,
+      "finished_utc": "2026-10-03T16:14:14.420541+00:00"
+    },
+    {
+      "job_id": "job-12",
+      "case_id": "late-B-97",
+      "replicate": 5,
+      "implementation": "early",
+      "worker_receipt_sha256": "e35a1346670299163a2e3aaff381fffbe3d74c8d84b8b22c60664f3a1213715b",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 8922890800,
+          "elapsed_ms": 8922.8908,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 7766256300,
+          "elapsed_ms": 7766.2563,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8344.57355,
+      "finished_utc": "2026-10-03T16:14:40.167141+00:00"
+    },
+    {
+      "job_id": "job-13",
+      "case_id": "ambiguous-B-1",
+      "replicate": 2,
+      "implementation": "early",
+      "worker_receipt_sha256": "64ce237b1f6dfb75f584a6d0d54e14a736ea5e2e3c3678106f851ff90a9e207b",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 128293500,
+          "elapsed_ms": 128.2935,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 128657600,
+          "elapsed_ms": 128.6576,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 128.47555,
+      "finished_utc": "2026-10-03T16:14:40.833947+00:00"
+    },
+    {
+      "job_id": "job-14",
+      "case_id": "ambiguous-B-1",
+      "replicate": 2,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "514972a698398af7e97fedc333420acdeddcb31afcf309b680b858339c7ad24a",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 124967500,
+          "elapsed_ms": 124.9675,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 130612800,
+          "elapsed_ms": 130.6128,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 127.79015,
+      "finished_utc": "2026-10-03T16:14:41.486155+00:00"
+    },
+    {
+      "job_id": "job-15",
+      "case_id": "basic-B-5",
+      "replicate": 4,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "0db8046cd57b5032ad791db6e577401010e76a1f4dd3a2f015def8824412233a",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 380787000,
+          "elapsed_ms": 380.787,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 380016000,
+          "elapsed_ms": 380.016,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 380.4015,
+      "finished_utc": "2026-10-03T16:14:42.951265+00:00"
+    },
+    {
+      "job_id": "job-16",
+      "case_id": "basic-B-5",
+      "replicate": 4,
+      "implementation": "early",
+      "worker_receipt_sha256": "7fe871d6a4068ae555fab45749ecb58deca358e1a8c21fb18f8e42b6b4e46604",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 128128300,
+          "elapsed_ms": 128.1283,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 119657000,
+          "elapsed_ms": 119.657,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 123.89265,
+      "finished_utc": "2026-10-03T16:14:43.587090+00:00"
+    },
+    {
+      "job_id": "job-17",
+      "case_id": "early-B-97",
+      "replicate": 2,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "ebbe0ab4f35c92a4af5631d5f97f85b02ab56b4d8f626a5d1b53d1fffae3df3b",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 7554074600,
+          "elapsed_ms": 7554.0746,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 8959104300,
+          "elapsed_ms": 8959.1043,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8256.58945,
+      "finished_utc": "2026-10-03T16:15:06.576368+00:00"
+    },
+    {
+      "job_id": "job-18",
+      "case_id": "early-B-97",
+      "replicate": 2,
+      "implementation": "early",
+      "worker_receipt_sha256": "90fcd84c7bfd5d7f242e089b8409477b366c69bc6977de032997d8c2f6e488bb",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 165951200,
+          "elapsed_ms": 165.9512,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 178763000,
+          "elapsed_ms": 178.763,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 172.3571,
+      "finished_utc": "2026-10-03T16:15:07.478859+00:00"
+    },
+    {
+      "job_id": "job-19",
+      "case_id": "late-B-97",
+      "replicate": 1,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "24e3b35104b3a9a20ade334617ac7978a5b9196e6a9800d67cd698dec7b6b561",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6697874300,
+          "elapsed_ms": 6697.8743,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 6798858400,
+          "elapsed_ms": 6798.8584,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 6748.36635,
+      "finished_utc": "2026-10-03T16:15:29.313268+00:00"
+    },
+    {
+      "job_id": "job-20",
+      "case_id": "late-B-97",
+      "replicate": 1,
+      "implementation": "early",
+      "worker_receipt_sha256": "51183d84baeece59051f0a8d66f99885d98f2776f12ec90b7557d58cc3fad76b",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 9996125700,
+          "elapsed_ms": 9996.1257,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 7792383600,
+          "elapsed_ms": 7792.3836,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8894.25465,
+      "finished_utc": "2026-10-03T16:15:56.607876+00:00"
+    },
+    {
+      "job_id": "job-21",
+      "case_id": "ambiguous-B-1",
+      "replicate": 4,
+      "implementation": "early",
+      "worker_receipt_sha256": "ebf9000dd8f9a3a92a0fc7f164fea94076e21e29cc56357a9ebf086dc7c6cb23",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 150153700,
+          "elapsed_ms": 150.1537,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 149989900,
+          "elapsed_ms": 149.9899,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 150.0718,
+      "finished_utc": "2026-10-03T16:15:57.363250+00:00"
+    },
+    {
+      "job_id": "job-22",
+      "case_id": "ambiguous-B-1",
+      "replicate": 4,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "4e4d9754e7251a7cbdbbc91d0dab054290bce239a80e3a0e6b79814db30df48d",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 129898600,
+          "elapsed_ms": 129.8986,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 131234900,
+          "elapsed_ms": 131.2349,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 130.56675,
+      "finished_utc": "2026-10-03T16:15:58.073273+00:00"
+    },
+    {
+      "job_id": "job-23",
+      "case_id": "basic-B-5",
+      "replicate": 5,
+      "implementation": "early",
+      "worker_receipt_sha256": "5ad711752bb568a1e9b54016ca63e850b1f06ce2a19f65637a675f4f10180f94",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 137728400,
+          "elapsed_ms": 137.7284,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 125093900,
+          "elapsed_ms": 125.0939,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 131.41115,
+      "finished_utc": "2026-10-03T16:15:58.776028+00:00"
+    },
+    {
+      "job_id": "job-24",
+      "case_id": "basic-B-5",
+      "replicate": 5,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "9339775d66f0371b4ac4dd889f0a1dcb9a70faf59eb0b77827589b70db15b4e6",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 480180400,
+          "elapsed_ms": 480.1804,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 477950400,
+          "elapsed_ms": 477.9504,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 479.0654,
+      "finished_utc": "2026-10-03T16:16:00.504776+00:00"
+    },
+    {
+      "job_id": "job-25",
+      "case_id": "basic-B-5",
+      "replicate": 3,
+      "implementation": "early",
+      "worker_receipt_sha256": "f99ff66f4d07f6f9641361d84eafc865e0b9fecf3c9be5e040c634c22264e407",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 161755400,
+          "elapsed_ms": 161.7554,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 162958800,
+          "elapsed_ms": 162.9588,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 162.3571,
+      "finished_utc": "2026-10-03T16:16:01.316409+00:00"
+    },
+    {
+      "job_id": "job-26",
+      "case_id": "basic-B-5",
+      "replicate": 3,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "51ba06e2697402c93c994d7d1d0a263b9143b3564aee9a0ad27f7d741f773067",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 412240600,
+          "elapsed_ms": 412.2406,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 395793300,
+          "elapsed_ms": 395.7933,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 404.01694999999995,
+      "finished_utc": "2026-10-03T16:16:02.839868+00:00"
+    },
+    {
+      "job_id": "job-27",
+      "case_id": "basic-B-5",
+      "replicate": 1,
+      "implementation": "early",
+      "worker_receipt_sha256": "79a541fa1aabf275281d973f5bc754af293dc6edaa93c639556ec55db7b92112",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 153575200,
+          "elapsed_ms": 153.5752,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 158147300,
+          "elapsed_ms": 158.1473,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 155.86124999999998,
+      "finished_utc": "2026-10-03T16:16:03.583929+00:00"
+    },
+    {
+      "job_id": "job-28",
+      "case_id": "basic-B-5",
+      "replicate": 1,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "30a60f12c72c2537ee12fa9716d238aa884458d4eee0c6e34b5394b7273e8a58",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 537412300,
+          "elapsed_ms": 537.4123,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 453575500,
+          "elapsed_ms": 453.5755,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 495.49389999999994,
+      "finished_utc": "2026-10-03T16:16:05.446753+00:00"
+    },
+    {
+      "job_id": "job-29",
+      "case_id": "early-B-97",
+      "replicate": 1,
+      "implementation": "early",
+      "worker_receipt_sha256": "9301f18372d433dc850f6104077bc6288c92d7f0f76931f67d4ee1f44f9cd8a0",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 182892500,
+          "elapsed_ms": 182.8925,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 186171600,
+          "elapsed_ms": 186.1716,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 184.53205000000003,
+      "finished_utc": "2026-10-03T16:16:06.347113+00:00"
+    },
+    {
+      "job_id": "job-30",
+      "case_id": "early-B-97",
+      "replicate": 1,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "ef62cf02624e56e473b141b9130a9aa353f0239410b978e4b44dc50f0ba9dc25",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6445558400,
+          "elapsed_ms": 6445.5584,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 6312049900,
+          "elapsed_ms": 6312.0499,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 6378.80415,
+      "finished_utc": "2026-10-03T16:16:27.308630+00:00"
+    },
+    {
+      "job_id": "job-31",
+      "case_id": "ambiguous-B-1",
+      "replicate": 1,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "d07c9f772eeaebff78a398c167fec3c3a49c0225700794b8c7911a2ef3aba504",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 114589000,
+          "elapsed_ms": 114.589,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 115884800,
+          "elapsed_ms": 115.8848,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 115.23689999999999,
+      "finished_utc": "2026-10-03T16:16:27.928641+00:00"
+    },
+    {
+      "job_id": "job-32",
+      "case_id": "ambiguous-B-1",
+      "replicate": 1,
+      "implementation": "early",
+      "worker_receipt_sha256": "d560c45ac3014d99606029b224ad14a99bdcbabdb19c9a2de11d8a99f0948900",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 114939600,
+          "elapsed_ms": 114.9396,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 117183900,
+          "elapsed_ms": 117.1839,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 116.06174999999999,
+      "finished_utc": "2026-10-03T16:16:28.552533+00:00"
+    },
+    {
+      "job_id": "job-33",
+      "case_id": "early-B-97",
+      "replicate": 5,
+      "implementation": "early",
+      "worker_receipt_sha256": "44d4311f1e6d7461d7011b8e8f4c270ec83c2b08ca546ac997022a7422894452",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 121729300,
+          "elapsed_ms": 121.7293,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 119284800,
+          "elapsed_ms": 119.2848,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 120.50704999999999,
+      "finished_utc": "2026-10-03T16:16:29.195915+00:00"
+    },
+    {
+      "job_id": "job-34",
+      "case_id": "early-B-97",
+      "replicate": 5,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "6db6e3bf5a60abca07fe9118a45f0a459932e0b4e6c1915ae34cf86c3f481213",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6425528000,
+          "elapsed_ms": 6425.528,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 6202318300,
+          "elapsed_ms": 6202.3183,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 6313.9231500000005,
+      "finished_utc": "2026-10-03T16:16:48.351795+00:00"
+    },
+    {
+      "job_id": "job-35",
+      "case_id": "late-B-97",
+      "replicate": 2,
+      "implementation": "early",
+      "worker_receipt_sha256": "6f66cf057d8adf69980062bf54da2079de0d5b15568e2fb948bfff564dba1984",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 10426938800,
+          "elapsed_ms": 10426.9388,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 9283423200,
+          "elapsed_ms": 9283.4232,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 9855.181,
+      "finished_utc": "2026-10-03T16:17:15.120482+00:00"
+    },
+    {
+      "job_id": "job-36",
+      "case_id": "late-B-97",
+      "replicate": 2,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "49d1995bbf7d6d77fd10555863129a45ce234009c59881bcf4f86294708d0627",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 6596789300,
+          "elapsed_ms": 6596.7893,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 8829350800,
+          "elapsed_ms": 8829.3508,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 7713.07005,
+      "finished_utc": "2026-10-03T16:17:38.040691+00:00"
+    },
+    {
+      "job_id": "job-37",
+      "case_id": "early-B-97",
+      "replicate": 4,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "956126e8cd19f8db1697bf7ae12762383d42515ed8d0788f062bf0230812698d",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 8819146900,
+          "elapsed_ms": 8819.1469,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 8042896700,
+          "elapsed_ms": 8042.8967,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 8431.0218,
+      "finished_utc": "2026-10-03T16:18:02.429656+00:00"
+    },
+    {
+      "job_id": "job-38",
+      "case_id": "early-B-97",
+      "replicate": 4,
+      "implementation": "early",
+      "worker_receipt_sha256": "a19b9d2dcf69f288cd28fd447510316753b10e13d0e64d22209e94e1ff224006",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 162998400,
+          "elapsed_ms": 162.9984,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 143826900,
+          "elapsed_ms": 143.8269,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 153.41264999999999,
+      "finished_utc": "2026-10-03T16:18:03.247481+00:00"
+    },
+    {
+      "job_id": "job-39",
+      "case_id": "basic-B-5",
+      "replicate": 2,
+      "implementation": "baseline",
+      "worker_receipt_sha256": "9179577facc866dbcd3bb90b3b2ce29760b5fb3612aeef49cf4d54a74b047341",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 403294500,
+          "elapsed_ms": 403.2945,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 408691400,
+          "elapsed_ms": 408.6914,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 405.99295,
+      "finished_utc": "2026-10-03T16:18:04.799845+00:00"
+    },
+    {
+      "job_id": "job-40",
+      "case_id": "basic-B-5",
+      "replicate": 2,
+      "implementation": "early",
+      "worker_receipt_sha256": "87e4342269a1392bbdc61fdd16c6944c503f2e498bf6ff121a30b1e57b3d1836",
+      "samples": [
+        {
+          "call": 1,
+          "elapsed_ns": 129219400,
+          "elapsed_ms": 129.2194,
+          "verified": true
+        },
+        {
+          "call": 2,
+          "elapsed_ns": 138143700,
+          "elapsed_ms": 138.1437,
+          "verified": true
+        }
+      ],
+      "process_mean_ms": 133.68155000000002,
+      "finished_utc": "2026-10-03T16:18:05.521374+00:00"
+    }
+  ],
+  "limits": [
+    "Mean paired ratios differ from ratios of grand means; no pooled universal speedup.",
+    "Standard deviations describe between-process dispersion, not confidence intervals or request-tail latency.",
+    "The one-letter and late-fragment cases had higher mean times with early rejection.",
+    "Full match sets agree across implementations; only basic-B-5 has an independently enumerated complete reference set.",
+    "Recorded hashes establish consistency and provenance, not independent attestation.",
+    "The application engine was corrected before both measured strategies; the unfinished original prototype is not the comparator."
+  ]
+}
