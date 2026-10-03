@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e7">
+  <meta name="description" content="Explore a three-rotor Enigma simulator, follow every signal, and search a bounded set of starting positions.">
+  <title>Enigma Lab — a personal experiment, explored</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workbench">Skip to the workbench</a>
+  <div class="page-shell">
+    <header class="masthead">
+      <a class="wordmark" href="/" aria-label="Enigma Lab home"><span class="brand-mark" aria-hidden="true">E</span><span>ENIGMA <strong>LAB</strong></span></a>
+      <span class="connection-badge" id="connection-badge"><span class="status-dot" aria-hidden="true"></span><span id="connection-label">Connecting locally</span></span>
+    </header>
+
+    <section class="introduction" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">A HISTORICAL CIPHER, MADE VISIBLE</p>
+        <h1 id="page-title">Turn a key.<br><em>Follow the signal.</em></h1>
+        <p class="lead">Explore how Enigma transforms a message, one letter and one rotor movement at a time.</p>
+      </div>
+      <aside class="origin-note" aria-label="The project's history">
+        <p class="eyebrow">FROM A PERSONAL EXPERIMENT</p>
+        <p>This began as JJ’s independent exploration of Enigma using contemporary computing. It has grown into a traceable simulator and a search over a clearly defined set of keys.</p>
+        <p class="model-caption">THREE ROTORS <span aria-hidden="true">/</span> I–V <span aria-hidden="true">/</span> WIDE B &amp; C</p>
+      </aside>
+    </section>
+
+    <main id="workbench" class="workbench">
+      <nav class="mode-bar" aria-label="Choose an operation">
+        <div class="mode-switch" role="group" aria-label="Operation">
+          <button id="mode-transform" class="mode-button is-selected" type="button" aria-pressed="true"><span class="mode-number">01</span> Transform a message</button>
+          <button id="mode-search" class="mode-button" type="button" aria-pressed="false"><span class="mode-number">02</span> Find starting positions</button>
+        </div>
+        <span class="mode-caption" id="mode-caption">A known key. An observable path.</span>
+      </nav>
+
+      <div class="workbench-grid">
+        <section class="configuration-panel" aria-labelledby="configuration-heading">
+          <div class="panel-heading"><p class="eyebrow">SET THE MACHINE</p><h2 id="configuration-heading">Your configuration</h2></div>
+          <form id="machine-form" novalidate>
+            <fieldset id="machine-fields" disabled>
+              <legend class="sr-only">Machine settings and message</legend>
+              <div class="sample-picker">
+                <label for="sample-select">Try a reference example</label>
+                <div class="sample-row"><select id="sample-select"><option value="">Loading examples…</option></select><button id="load-sample" class="button button-subtle" type="button">Load</button></div>
+                <p class="field-hint" id="sample-description">Complete settings and expected results are included.</p>
+                <div id="sample-expectation" class="sample-expectation" hidden><span class="small-label">REFERENCE EXPECTATION</span><p id="sample-expected-text"></p><p class="field-hint" id="sample-footnote"></p></div>
+              </div>
+
+              <div class="field-section">
+                <div class="section-label"><h3>Rotor order</h3><span>left → right</span></div>
+                <div class="rotor-selects">
+                  <div class="field"><label for="rotor-left">Left <span>· slow</span></label><select id="rotor-left"><option selected>I</option><option>II</option><option>III</option><option>IV</option><option>V</option></select></div>
+                  <div class="field"><label for="rotor-middle">Middle</label><select id="rotor-middle"><option>I</option><option selected>II</option><option>III</option><option>IV</option><option>V</option></select></div>
+                  <div class="field"><label for="rotor-right">Right <span>· fast</span></label><select id="rotor-right"><option>I</option><option>II</option><option selected>III</option><option>IV</option><option>V</option></select></div>
+                </div>
+                <p class="field-hint">Choose three different rotors.</p>
+                <div class="key-fields" id="key-fields">
+                  <div class="field"><label for="reflector">Reflector <span>· wide</span></label><select id="reflector"><option value="B">B</option><option value="C">C</option></select></div>
+                  <div class="field"><label for="rings">Ring settings</label><input id="rings" class="letter-input" value="AAA" maxlength="3" spellcheck="false" autocomplete="off" autocapitalize="characters" aria-describedby="key-hint"></div>
+                  <div class="field" id="positions-field"><label for="positions">Start windows</label><input id="positions" class="letter-input" value="AAA" maxlength="3" spellcheck="false" autocomplete="off" autocapitalize="characters" aria-describedby="key-hint"></div>
+                </div>
+                <p class="field-hint" id="key-hint">Three letters, left to right. Windows are set before the first keypress.</p>
+                <p class="search-scope-note" id="unknown-windows-note" hidden>Starting windows are unknown here. The search checks every triple from <strong>AAA</strong> to <strong>ZZZ</strong>, with the other settings held fixed.</p>
+                <div class="field plugboard-field"><label for="plugboard">Plugboard <span>· optional</span></label><input id="plugboard" class="letter-input" placeholder="AB CD EF" spellcheck="false" autocomplete="off" autocapitalize="characters" aria-describedby="plugboard-hint"><p class="field-hint" id="plugboard-hint">Space-separated pairs. Each letter can appear only once.</p></div>
+              </div>
+
+              <div class="field-section message-section">
+                <div class="section-label"><label class="section-title" for="message-input" id="message-label">Message to transform</label><span class="letter-count" id="message-count">5 letters</span></div>
+                <textarea id="message-input" rows="4" spellcheck="false" autocomplete="off" autocapitalize="characters" aria-describedby="text-policy">AAAAA</textarea>
+                <p class="field-hint" id="text-policy">A–Z only, in either case. ASCII spaces, tabs and line breaks are removed; punctuation and other characters are rejected.</p>
+                <div id="search-fields" hidden>
+                  <div class="crib-row"><div class="field"><label for="crib-input">Known plaintext fragment <span>· crib</span></label><input id="crib-input" class="letter-input" value="AAAAA" spellcheck="false" autocomplete="off" autocapitalize="characters" aria-describedby="crib-hint"></div><div class="field offset-field"><label for="offset-input">Offset</label><input id="offset-input" type="number" value="0" min="0" step="1" inputmode="numeric" aria-describedby="crib-hint"></div></div>
+                  <p class="field-hint" id="crib-hint">Where the fragment begins after whitespace is removed. Offset 0 means the first letter; offset 1 means the second.</p>
+                  <div class="field strategy-field"><label for="strategy-input">Search method</label><select id="strategy-input"><option value="baseline">Baseline · decrypt every letter</option><option value="early">Early rejection · stop on a mismatch</option></select><p class="field-hint">Both check all 17,576 starting positions. Early rejection can do less work, but is not always faster.</p></div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="action-row"><button id="run-button" class="button button-primary" type="submit" disabled><span id="run-label">Transform message</span><span aria-hidden="true">↗</span></button><button id="cancel-button" class="button button-cancel" type="button" hidden>Cancel search</button></div>
+            <p class="action-hint" id="action-hint">Encrypt and decrypt with the same initial settings.</p>
+          </form>
+          <div id="error-message" class="error-message" role="alert" hidden></div>
+          <button id="retry-button" class="button button-subtle retry-button" type="button" hidden>Check connection</button>
+          <noscript><p class="error-message">Enable JavaScript to use this local workbench.</p></noscript>
+        </section>
+
+        <section class="results-panel" aria-labelledby="results-heading">
+          <div class="result-heading-row"><div class="panel-heading"><p class="eyebrow">SEE WHAT HAPPENS</p><h2 id="results-heading">Inside the machine</h2></div><span class="result-badge" id="result-badge">Ready</span></div>
+          <p class="request-status" id="request-status" role="status" aria-live="polite">Load an example or use the default settings, then transform your message.</p>
+
+          <div id="welcome-panel" class="welcome-panel">
+            <div class="welcome-dial" aria-hidden="true"><span>I</span><span>II</span><span>III</span></div>
+            <p class="eyebrow">START WITH FIVE LETTERS</p>
+            <div class="welcome-equation"><span>AAAAA</span><span class="equation-arrow" aria-hidden="true">→</span><span>BDZGO</span></div>
+            <p>Each A takes a different route as the rotors move. Run the example to follow every step.</p>
+            <span class="reference-tag">REFERENCE EXAMPLE · NOT YET RUN</span>
+            <div class="welcome-facts"><div><strong>3</strong><span>moving rotors</span></div><div><strong>9</strong><span>signal stages per key</span></div><div><strong>17,576</strong><span>possible starting windows</span></div></div>
+          </div>
+
+          <div id="transform-result" hidden>
+            <div class="result-keyline"><span class="small-label">SETTINGS USED</span><p id="transform-settings"></p></div>
+            <div class="output-box"><div class="output-heading"><span class="small-label">TRANSFORMED MESSAGE</span><button id="copy-output" class="text-button" type="button">Copy output</button></div><pre id="output-text" tabindex="0" aria-label="Transformed output"></pre><div class="output-meta"><span id="output-length"></span><span>Final windows <strong id="final-windows"></strong></span></div></div>
+            <div id="trace-panel" class="trace-panel">
+              <div class="trace-heading"><div><h3>One keypress, step by step</h3><p class="field-hint">The rotors move before the signal passes through.</p></div><span class="letter-transition" id="trace-letter"></span></div>
+              <div class="trace-navigation"><button id="trace-prev" class="step-button" type="button" aria-label="Previous character">←</button><div class="trace-slider"><label for="trace-step" id="trace-counter">Character 1 of 5</label><input id="trace-step" type="range" min="1" max="5" value="1" aria-label="Choose a character to inspect"></div><button id="trace-next" class="step-button" type="button" aria-label="Next character">→</button></div>
+              <div class="window-comparison"><div><p class="small-label">BEFORE KEYPRESS</p><div class="window-tiles" id="windows-before"></div></div><span class="window-arrow" aria-hidden="true">→</span><div><p class="small-label">AFTER STEPPING</p><div class="window-tiles" id="windows-after"></div></div></div>
+              <div class="signal-heading"><h3>The signal path</h3><span>input → reflector → output</span></div><ol class="signal-path" id="signal-path" aria-label="Ordered signal stages"></ol>
+              <p class="trace-note">Every position and signal stage above comes from the simulator’s recorded trace.</p>
+            </div>
+            <p class="empty-trace" id="empty-trace" hidden>No letters were entered, so the rotors did not move.</p>
+          </div>
+
+          <div id="search-result" hidden>
+            <div class="search-overview"><span class="small-label">BOUNDED STARTING-POSITION SEARCH</span><h3 id="search-title">Searching the complete domain</h3><p id="search-state-detail">Rotor order, rings, reflector and plugboard stay fixed.</p></div>
+            <div id="search-settings-panel" class="result-keyline search-settings-panel" hidden><span class="small-label">SETTINGS AND INPUT USED</span><p id="search-settings"></p><details class="search-input-details"><summary>View the searched ciphertext and crib</summary><p id="search-input-snapshot"></p></details></div>
+            <div class="progress-block"><div class="progress-labels"><label for="search-progress">Starting positions checked</label><span id="search-progress-label">0 / 17,576</span></div><progress id="search-progress" value="0" max="17576">0 of 17,576</progress><p class="field-hint" id="progress-caption">Progress is reported by the local server.</p></div>
+            <div class="search-metrics"><div><span class="small-label">METHOD</span><strong id="search-strategy">Baseline</strong></div><div><span class="small-label">LETTERS TRANSFORMED</span><strong id="search-character-count">0</strong></div><div><span class="small-label">VERIFIED MATCHES</span><strong id="match-count">—</strong></div></div>
+            <div class="match-section"><div class="section-label"><h3>Matching start windows</h3><span id="matches-label">Awaiting a complete search</span></div><p id="matches-explanation" class="matches-explanation">Matches are shown only after all starting positions have been checked.</p><div id="matches-list" class="matches-list" tabindex="0" role="list" aria-label="All matching starting positions" hidden></div></div>
+            <div class="scope-card"><span class="small-label">WHAT THIS SEARCH KNOWS</span><p>Only the three starting windows are unknown. This does not recover unknown rotor order, ring settings or plugboard connections.</p></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="page-footer"><p><strong>Enigma Lab</strong> <span aria-hidden="true">·</span> A continuing personal exploration</p><p>Local computation. No external assets. Documented I–V / wide-B,C subset.</p></footer>
+  </div>
+</body>
+</html>
