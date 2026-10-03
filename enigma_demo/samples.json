@@ -1,0 +1,235 @@
+[
+  {
+    "id": "published-basic-B",
+    "title": "First five letters",
+    "description": "A published example: five As become BDZGO. Reset to the same key to decrypt it.",
+    "mode": "transform",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "B",
+      "rings": "AAA",
+      "positions": "AAA",
+      "plugboard": ""
+    },
+    "text": "AAAAA",
+    "expected": {
+      "output": "BDZGO",
+      "final_positions": "AAF",
+      "windows_after_keys": [
+        "AAB",
+        "AAC",
+        "AAD",
+        "AAE",
+        "AAF"
+      ]
+    },
+    "footnote": "Expected values are saved reference evidence; the live trace comes from the same cipher engine."
+  },
+  {
+    "id": "derived-double-step-C",
+    "title": "See the double step",
+    "description": "Follow the middle rotor across consecutive key presses. Watch the before and after windows.",
+    "mode": "transform",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "C",
+      "rings": "QAZ",
+      "positions": "ADU",
+      "plugboard": ""
+    },
+    "text": "AAA",
+    "expected": {
+      "output": "DKR",
+      "final_positions": "BFX",
+      "windows_after_keys": [
+        "ADV",
+        "AEW",
+        "BFX"
+      ]
+    },
+    "footnote": "Expected values are saved reference evidence; the live trace comes from the same cipher engine."
+  },
+  {
+    "id": "published-nondefault-key",
+    "title": "Rings and plugboard",
+    "description": "A published example with different rotors, rings and ten plug pairs: BLA becomes KCH.",
+    "mode": "transform",
+    "settings": {
+      "rotors": [
+        "II",
+        "IV",
+        "V"
+      ],
+      "reflector": "B",
+      "rings": "BUL",
+      "positions": "WXC",
+      "plugboard": "AV BS CG DL FU HZ IN KM OW RX"
+    },
+    "text": "BLA",
+    "expected": {
+      "output": "KCH",
+      "final_positions": "WXF",
+      "windows_after_keys": [
+        "WXD",
+        "WXE",
+        "WXF"
+      ]
+    },
+    "footnote": "Expected values are saved reference evidence; the live trace comes from the same cipher engine."
+  },
+  {
+    "id": "basic-B-5",
+    "title": "Recover the starting windows",
+    "description": "Find every starting position for BDZGO with AAAAA as the known plaintext.",
+    "mode": "search",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "B",
+      "rings": "AAA",
+      "positions": "AAA",
+      "plugboard": ""
+    },
+    "ciphertext": "BDZGO",
+    "crib": "AAAAA",
+    "offset": 0,
+    "strategy": "baseline",
+    "expected": {
+      "matches": [
+        "AAA"
+      ],
+      "match_count": 1,
+      "candidates_checked": 17576,
+      "complete": true
+    },
+    "footnote": "Expected candidates are retained from the verified experiment. UEW and VFW converge before their first signal in the 97-letter examples."
+  },
+  {
+    "id": "ambiguous-B-1",
+    "title": "One letter, many answers",
+    "description": "A short known fragment leaves many possible starting positions. Every match is kept.",
+    "mode": "search",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "IV"
+      ],
+      "reflector": "B",
+      "rings": "RZN",
+      "positions": "AAA",
+      "plugboard": ""
+    },
+    "ciphertext": "O",
+    "crib": "V",
+    "offset": 0,
+    "strategy": "baseline",
+    "expected": {
+      "match_count": 714,
+      "candidates_checked": 17576,
+      "complete": true
+    },
+    "footnote": "Expected candidates are retained from the verified experiment. UEW and VFW converge before their first signal in the 97-letter examples."
+  },
+  {
+    "id": "early-B-97",
+    "title": "A fragment at the beginning",
+    "description": "The first 12 letters are known. Early rejection can avoid most remaining cipher work.",
+    "mode": "search",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "B",
+      "rings": "WKZ",
+      "positions": "AAA",
+      "plugboard": "EC XP AK GV US TM"
+    },
+    "ciphertext": "KSMCUUJGHLKTTPCDJAQZOQZHXYXOYUSLCSVELIVVUEWPLJSAARNJGPETNFQOJYVXMZXKFAKUKBRUHKBFZVBQKCEAKTHCSIWVL",
+    "crib": "JYVPKVUXSMVZ",
+    "offset": 0,
+    "strategy": "early",
+    "expected": {
+      "matches": [
+        "UEW",
+        "VFW"
+      ],
+      "match_count": 2,
+      "candidates_checked": 17576,
+      "complete": true
+    },
+    "footnote": "Expected candidates are retained from the verified experiment. UEW and VFW converge before their first signal in the 97-letter examples."
+  },
+  {
+    "id": "late-B-97",
+    "title": "The same message, a late fragment",
+    "description": "The last 12 letters are known. Both methods still need to process the long prefix.",
+    "mode": "search",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "B",
+      "rings": "WKZ",
+      "positions": "AAA",
+      "plugboard": "EC XP AK GV US TM"
+    },
+    "ciphertext": "KSMCUUJGHLKTTPCDJAQZOQZHXYXOYUSLCSVELIVVUEWPLJSAARNJGPETNFQOJYVXMZXKFAKUKBRUHKBFZVBQKCEAKTHCSIWVL",
+    "crib": "HGTVCAIZABCK",
+    "offset": 85,
+    "strategy": "baseline",
+    "expected": {
+      "matches": [
+        "UEW",
+        "VFW"
+      ],
+      "match_count": 2,
+      "candidates_checked": 17576,
+      "complete": true
+    },
+    "footnote": "Expected candidates are retained from the verified experiment. UEW and VFW converge before their first signal in the 97-letter examples."
+  },
+  {
+    "id": "no-match",
+    "title": "A search with no matches",
+    "description": "An Enigma letter cannot map to itself in this supported model. This request has no valid starting position.",
+    "mode": "search",
+    "settings": {
+      "rotors": [
+        "I",
+        "II",
+        "III"
+      ],
+      "reflector": "B",
+      "rings": "AAA",
+      "positions": "AAA",
+      "plugboard": ""
+    },
+    "ciphertext": "AAAAA",
+    "crib": "AAAAA",
+    "offset": 0,
+    "strategy": "early",
+    "expected": {
+      "matches": [],
+      "match_count": 0,
+      "candidates_checked": 17576,
+      "complete": true
+    },
+    "footnote": "No matches is a successful complete search, not an application error."
+  }
+]
