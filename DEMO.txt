@@ -1,0 +1,95 @@
+ENIGMA LAB — LOCAL BROWSER DEMO
+
+START FROM A SOURCE CHECKOUT
+Install Python 3.12+ and run from the repository root:
+
+    python -B -X utf8 -m enigma_demo
+
+Open the printed http://127.0.0.1:<port>/ address exactly. Do not substitute
+localhost: the request guard checks the printed host. Keep the terminal running.
+A free port is selected by default. No third-party runtime packages, frontend
+build step, remote scripts or dataset downloads are required.
+
+On Windows, the optional PowerShell launcher also resolves paths from its own
+location and supports an explicitly selected interpreter:
+
+    .\Start_Enigma_Demo.ps1
+    .\Start_Enigma_Demo.ps1 -Python 'C:\path\to\python.exe'
+
+Use -Port 8765 to request a fixed port; an occupied port is refused. A browser
+opens only with -OpenBrowser. Use python3.12 instead of python where appropriate.
+The program requests shutdown on Ctrl+C; actual console interrupt delivery is
+separate from the tested injected-interruption and server/worker-join paths.
+
+A SHORT WALKTHROUGH
+1. Load "First five letters", then transform. AAAAA becomes BDZGO. The first
+   key changes windows AAA → AAB before the signal. Follow the nine stages.
+2. Load "See the double step". AAA becomes DKR. Step through the traces:
+   ADU → ADV → AEW → BFX. The middle rotor moves on consecutive presses.
+3. Load "Rings and plugboard". BLA becomes KCH with II–IV–V, reflector B,
+   rings BUL, windows WXC and the ten included plugboard pairs.
+4. Load "Recover the starting windows". A complete search checks all 17,576
+   triples and returns AAA. The other settings are known and fixed.
+5. Load "One letter, many answers". The complete search retains 714 starts,
+   demonstrating why a small fragment need not identify a unique key.
+
+MORE EXAMPLES
+- "A fragment at the beginning": 97 letters, first 12 known; early rejection.
+  Both UEW and VFW match.
+- "The same message, a late fragment": offset 85, baseline selected; the same
+  two starts match. They converge to VFX before the first signal for this key.
+- "A search with no matches": AAAAA/AAAAA; zero matches after a complete scan.
+  The supported reciprocal-reflector machine never maps a letter to itself.
+
+Expectations are saved in enigma_demo/samples.json, independently of the current
+HTTP response. Transform expectations come from saved reference cases; benchmark
+sample match sets come from the retained complete-search results. Editing a form
+removes its old reference expectation and labels computed results as previous.
+
+INPUTS AND RESULTS
+Choose three different I–V rotors, left to right (slow to fast), wide B/C reflector,
+three-letter rings/windows and disjoint plugboard pairs. The same initial settings
+encrypt and decrypt. Every transform starts a fresh machine. ASCII whitespace is
+removed and letters are uppercased; other characters are rejected. Each normalized
+browser text field is limited to 256 letters.
+
+Search varies only starting windows. The crib is known plaintext at exactly the
+specified zero-based offset after normalization. It is not a language-scored guess.
+All matching starts are kept; a complete zero-match result and ambiguity are both
+valid outcomes.
+
+Only one search runs at a time. A worker invokes the shared APIs on batches of 64
+starts. Progress, cancellation and the 60-second deadline are checked between
+batches; an executing batch must finish before cancellation takes effect. This
+is not a hard real-time deadline. At most eight recent jobs stay in memory.
+
+Cancelled, timed-out or failed jobs have no complete-domain result. Partial matches
+cannot establish the full answer. If the browser loses its connection, a job may
+still be running on the server; the UI reports the outcome as unknown.
+
+Both strategies search the complete domain. Baseline decrypts each full message.
+Early rejection stops a candidate on its first crib mismatch and skips an
+irrelevant suffix. Neither stops the entire search at its first match. The
+benchmark covers complete-domain API calls, not this batched browser execution;
+its timings must not be presented as page or end-to-end browser latency.
+
+LOCAL BOUNDARY
+The server binds only to 127.0.0.1 and serves an allowlist of fixed assets. Exact
+Host/Origin checks and a per-launch token protect local POST requests. The page
+loads no remote fonts, scripts or services. Text, settings and job history stay
+in memory and disappear on restart. This standard-library server is a local
+demonstration, not a public deployment or modern encryption tool.
+
+TROUBLESHOOTING
+- Page stops loading: check that the terminal still runs, then open the current
+  printed URL. A remembered port can belong to an earlier launch.
+- Search already running: wait for that job or cancel it from its original tab.
+- Invalid token after restart: reload to receive the new session token.
+- No matches: check fixed settings, normalized inputs and zero-based crib offset.
+- Multiple matches: a crib can be insufficient; some starting states converge
+  before the first signal, so extra plaintext does not always remove ambiguity.
+
+TESTING AND MEASUREMENTS
+TESTING.txt describes repeatable Python checks and browser-coverage limits.
+The four-case timing experiment is documented separately in
+experiments/search-latency-v1/MEASURED_RESULTS.txt.

@@ -1,0 +1,109 @@
+ENIGMA LAB — DESIGN NOTES
+
+ROTOR COORDINATES
+Letters A–Z correspond to integers 0–25. For rotor position p and ring setting r,
+the wiring offset is d = p - r. A signal enters at (x + d) modulo 26, follows
+wiring W, then returns to stationary coordinates by subtracting d:
+
+    y = (W[(x + d) mod 26] - d) mod 26
+
+The reverse path uses the inverse permutation in the same formula. Each rotor's
+forward permutation is stored once; inverse[j] = i is derived from W[i] = j.
+The original prototype shifted in but did not shift out on the forward path.
+Its reverse undid that mapping, so its own round trips could still work. This
+is why independent expected outputs are necessary alongside inverse checks.
+
+STEPPING BEFORE THE SIGNAL
+Read the middle and right visible-window notch conditions before moving either
+rotor. Move the left rotor when the middle is at its notch; move the middle when
+either middle or right is at its notch; always move the right rotor. Each move
+wraps with (position + 1) modulo 26. Then propagate the electrical signal.
+
+One shared pre-key decision reproduces the middle rotor's consecutive steps.
+The notch is attached to the letter ring, so its visible trigger letter does not
+move when ring settings change. Physical notch labels and window letters differ.
+
+SETTINGS AND STATE HAVE DIFFERENT LIFETIMES
+RotorSpec and MachineKey are frozen dataclasses. Nested mutable inputs become
+tuples; fixed specifications are exposed through read-only mapping proxies.
+These measures prevent accidental edits, rather than establishing a security
+boundary. A Machine separately owns its current positions. Reset and continued
+processing have different meanings, and the initial key stays intact.
+
+Each CLI/browser transformation creates its own machine. A Machine instance is
+not itself thread-safe. The application does not share mutable rotor positions
+between requests.
+
+VALIDATE BEFORE MUTATION
+Validate the entire message before its first step. A bad final character cannot
+partly consume the rotor sequence. Check ASCII membership before uppercasing:
+some Unicode letters would otherwise expand and change the number of symbols.
+CLI/browser whitespace removal is explicit; core APIs accept letters only.
+Crib offsets count normalized letters from zero.
+
+A COMPLETE FINITE SEARCH
+Only the three starting windows vary. Rotor order, rings, reflector, plugboard
+and aligned known plaintext are supplied. Search examines all 26^3 = 17,576
+triples and retains every match. No match and multiple matches are valid answers;
+a matching candidate does not prove which key was historically used.
+
+The full-message baseline decrypts the complete ciphertext for each candidate,
+then compares the selected fragment. Early rejection advances through the prefix,
+then stops work on that candidate at its first crib mismatch. Once the whole
+crib matches, a suffix cannot change that decision. Both validate the complete
+input before transformation and both continue through every candidate.
+
+In search_early.py, the for/else appends a candidate only when the crib loop
+finishes without break. It never breaks the outer loop over starting windows.
+Every candidate starts from fresh state, independent of an earlier rejection.
+
+Let D be candidate count, N ciphertext length, M crib length and O crib offset.
+The baseline performs exactly D*N letter transformations. Early rejection uses
+between D*(O+1) and D*(O+M), depending on the first mismatch. Common validation
+and domain materialization cost O(D+N+M). Both have O(D+N+M) space use when
+inputs, the domain and retained matches are counted. Avoiding full plaintext
+strings does not change that asymptotic bound.
+
+WORK SAVINGS AND LATENCY ARE DIFFERENT
+Early search calls key_press for each letter, which repeats character validation;
+the baseline validates a full message and loops internally. The real API-call
+benchmark includes these costs. The early-fragment workload benefited strongly,
+while short/late workloads had higher observed mean times. No profiler experiment
+has assigned a measured fraction of time to validation or allocation.
+
+Both 97-letter examples retain UEW and VFW: under the fixed I–II–III settings,
+they both step to VFX before the first signal. Even a longer crib cannot identify
+which of these starts was used. The complete result expresses that ambiguity.
+See experiments/search-latency-v1/ for the frozen protocol and all four cases.
+
+TRACE THE SAME IMPLEMENTATION
+Ordinary processing and tracing use the same signal method. Records contain the
+plugboard input, three forward rotors, reflector, three reverse rotors and
+plugboard output. The browser renders those records without maintaining a
+separate JavaScript cipher.
+
+The local service validates requests and delegates to the engine. One background
+worker divides the finite search domain into ordered batches of 64. Progress,
+cancellation and the 60-second deadline are checked between batches. A batch may
+finish after the deadline. Only exhausting every start produces a complete global
+result. The UI hides partial matches and distinguishes cancellation from lost
+connectivity; completed results retain the input/settings that produced them.
+
+Batching enables progress and cooperative interruption but repeats API setup.
+It is outside the complete-domain benchmark boundary and is not parallel speedup.
+At most eight recent jobs remain in memory. Restarting the server clears them.
+
+LOCAL REQUEST BOUNDARY
+The HTTP adapter binds to 127.0.0.1, uses fixed asset routes, and checks exact
+Host/Origin values and a per-launch token. Windows exclusive binding prevents a
+second process from silently sharing its port. These are local demonstration
+controls, not user authentication or a public-service architecture. The browser
+loads no remote assets; the runtime uses Python's standard library.
+
+LAYERED CORRECTNESS EVIDENCE
+Structural invariants test internal consistency. Published vectors and mechanical
+traces provide specific external expectations. A saved Py-Enigma reference corpus
+adds independently computed B/C cases and a complete basic-search enumeration.
+Those references are not new physical-machine measurements or exhaustive proof
+for all keys. The comparison package is not imported by the running application.
+See tests/fixtures/README.txt for provenance and third-party notices.

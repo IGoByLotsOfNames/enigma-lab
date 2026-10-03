@@ -1,0 +1,4 @@
+# Path: working/requirements-dev.txt
+# Development tools only. The application and unittest suite use the standard library.
+ruff==0.16.10
+coverage==7.16.2

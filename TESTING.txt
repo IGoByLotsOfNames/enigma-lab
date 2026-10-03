@@ -1,0 +1,114 @@
+ENIGMA LAB — TESTS AND AUTOMATION
+
+RECORDED LOCAL RESULT
+The complete integration check on 4 October 2026 passed 151 unittest methods on
+Windows 11, Python 3.12.14, with zero skips or failures. Ruff 0.16.10 formatting
+and lint checks passed. coverage.py 7.16.2 reported:
+
+    Statements: 705 / 725 = 97.24%
+    Branches:   222 / 236 = 94.07%
+    Combined:   927 / 961 = 96.46%
+
+Coverage includes all seven enigma_lab and five enigma_demo Python modules. The
+90% floor was configured before the combined measurement. No application files
+are omitted and no exclusion pragmas inflate coverage. Passing a floor does not
+establish correctness; saved independent expected outputs provide separate evidence.
+Multiple subcases run inside some methods; 151 is the method count.
+The dated local record is docs/evidence/integration-verification.json; the compact
+coverage table is docs/evidence/coverage.txt. Browser observations are recorded
+separately from automated Python test results.
+
+CLEAN DEVELOPMENT SETUP
+From the repository root on Windows, with Python 3.12 installed:
+
+    python -m venv .venv-dev
+    .\.venv-dev\Scripts\python.exe -m pip install --only-binary=:all: -r requirements-dev.txt
+    .\.venv-dev\Scripts\python.exe -B -X utf8 tools/check.py
+
+On Linux:
+
+    python3.12 -m venv .venv-dev
+    .venv-dev/bin/python -m pip install --only-binary=:all: -r requirements-dev.txt
+    .venv-dev/bin/python -B -X utf8 tools/check.py
+
+Installation requires access to PyPI; subsequent tests are offline. The application
+itself uses the standard library. Check the relevant GitHub Actions run for hosted
+outcomes; the local receipt does not establish a cross-platform CI pass.
+
+INDIVIDUAL COMMANDS
+With the development interpreter selected:
+
+    python -m ruff format --check .
+    python -m ruff check .
+    python -B -X utf8 -m unittest discover -s tests -t . -v
+
+The unittest command needs no development packages. tools/check.py additionally
+collects coverage, logs and source hashes in ignored verification-results/
+subdirectories. The timed benchmark is separate and is never run by the test suite.
+
+TEST DESIGN
+- Engine: validated keys, ASCII rules, 0–13 disjoint plug pairs, atomic input
+  validation, reset/continuation, ring coordinates, inverses, pre-key notches,
+  double stepping, wraparound and structured signal traces.
+- References: published vectors and an independently generated 34-case corpus,
+  checked in both directions and against every stored post-key window.
+- Search: validated finite domains, whole-input validation, all/no/ambiguous
+  matches, offsets, immutable results and a saved independent full enumeration
+  of the 17,576-position five-letter search.
+- Early rejection: reference/baseline agreement, hand-counted prefix/mismatch/
+  suffix work, ambiguity, invalid unused suffixes and interruption handling.
+- CLI: real parsing, engine/search output, errors/help and fresh module imports.
+  Narrow mocks exercise interruptions, not fabricated cipher correctness.
+- Browser adapter: real loopback HTTP requests, malformed bodies, Host/Origin/
+  token checks, fixed assets and Windows exclusive-port behaviour.
+- Jobs: complete-domain agreement, progress, busy/cancel, deadlines, history and
+  shutdown. Injected functions/clocks make exceptional paths deterministic.
+- Benchmark tooling: schedule, locks, statistics and failures on synthetic
+  fixtures; these checks do not produce measured search-performance evidence.
+
+SCOPE AND REMAINING GAPS
+Python coverage measures neither HTML/CSS/JavaScript nor PowerShell. Browser and
+launcher observations are separate. The saved checks include the actual Windows
+browser controls and a narrow layout, not a screen-reader audit or full browser
+matrix. The repository is run from a checkout; no installed wheel or executable
+has been validated.
+
+The module entry guard is exercised in subprocess tests without subprocess
+coverage collection, so its statements are not credited in parent coverage.
+A defensive statement after argparse.error remains unreachable under the real
+parser. Fixed valid reflector constants are not mutated merely to cover their
+error guard. Missing lines and branches are retained in the coverage record.
+Other gaps include platform-specific bind paths, rare thread/cancellation races
+and connection-error edges.
+
+Actual OS-console Ctrl+C delivery was not reliably established by the tool
+terminal. Shutdown is checked with injected KeyboardInterrupt and actual
+server/worker joins. These are specific execution boundaries, not a universal
+interruption guarantee.
+
+External-software fixtures are not physical-machine measurements. They do not
+cover every possible key, all Enigma variants or wartime cryptanalysis. The
+thirteen-pair plugboard boundary has structural checks beyond the comparison
+package's ten-pair limit. Supplemental round trips alone do not establish fidelity.
+
+CI CONFIGURATION
+.github/workflows/ci.yml runs on pushes, pull requests and manual dispatch, with
+Python 3.12 on Windows and Ubuntu. It installs the pinned development tools and
+calls the same tools/check.py runner. Jobs have a 10-minute limit; runner commands
+have a 300-second limit. The actual interpreter/platform/tool versions are logged.
+
+Repository permissions are read-only and checkout does not persist credentials.
+Actions are pinned to official commit SHAs. .gitattributes controls source line
+endings while preserving fixture bytes. The workflow prints all check output;
+inspect the run for the specific commit instead of assuming local success also
+proves remote success.
+
+DEPENDENCIES AND REFERENCE PROVENANCE
+requirements-dev.txt pins Ruff 0.16.10 and coverage.py 7.16.2. Runtime has no
+third-party dependencies. CI installs the exact development versions from PyPI;
+this is version pinning, not a hash-locked wheel set.
+
+See tests/fixtures/README.txt for fixture hashes, provenance and third-party
+notices. Those notices apply to their source material and do not grant a licence
+for the entire application. The measured comparison retains all frozen source,
+inputs and observations independently of ordinary check runs.

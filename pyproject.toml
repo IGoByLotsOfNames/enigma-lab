@@ -1,0 +1,22 @@
+# Path: working/pyproject.toml
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+line-ending = "lf"
+
+[tool.coverage.run]
+branch = true
+source = ["enigma_lab", "enigma_demo"]
+relative_files = true
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+# A regression floor, not a claim that coverage proves correctness.
+fail_under = 90

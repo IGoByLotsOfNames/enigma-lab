@@ -1,0 +1,17 @@
+# Path: working/.gitignore
+__pycache__/
+*.py[cod]
+.venv/
+.venv-dev/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.json
+coverage.xml
+htmlcov/
+verification-results/
+experiments/*/results/
+experiments/*/validation-results/
+build/
+dist/
+*.egg-info/

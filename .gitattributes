@@ -1,0 +1,10 @@
+# Keep Python formatting identical on Windows and Linux checkouts.
+*.py text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+# Preserve the recorded bytes and hashes of reference evidence and notices.
+tests/fixtures/* -text
+# These experiment inputs and locks are hashed as exact bytes.
+experiments/*/*.json -text
+# Keep the unfinished historical source byte-identical to its retained archive.
+history/original-prototype.py.txt -text
