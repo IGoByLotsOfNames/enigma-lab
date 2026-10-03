@@ -425,7 +425,7 @@ class SyntheticOrchestrationTests(unittest.TestCase):
 
     def test_controller_failure_keeps_partial_job_without_aggregate(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             experiment = root / "experiment"
             experiment.mkdir()
             bundle = fixture_bundle()
@@ -471,7 +471,7 @@ class SyntheticOrchestrationTests(unittest.TestCase):
 
     def test_validate_command_boundary_never_starts_a_timer_or_worker(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             experiment = root / "experiment"
             experiment.mkdir()
             bundle = fixture_bundle()
